@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Ortiz · Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --c:#00eeff;--c2:#00b8cc;--cg:rgba(0,238,255,.13);--cgb:rgba(0,238,255,.06);
+  --mg:#ff2090;--mgg:rgba(255,32,144,.12);
+  --gold:#f5c518;--green:#00ff9f;--purple:#b56dff;--orange:#ff6b2b;
+  --bg0:#020408;--bg1:#05090f;--bg2:#080e1a;--bg3:#0c1422;--bg4:#111d30;
+  --t0:#e8f4ff;--t1:#7a9abb;--t2:#3d5570;--t3:#1d2e42;
+  --bdr:rgba(0,238,255,.1);--bdrb:rgba(0,238,255,.45);
+  --mono:'Share Tech Mono',monospace;
+  --disp:'Rajdhani',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --nav:58px;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--body);font-size:15px;line-height:1.65;color:var(--t0);background:var(--bg0);overflow-x:hidden;cursor:none}
+
+/* ══ SCROLLBAR ══════════════════════════════ */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg0)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--c),var(--mg))}
+
+/* ══ CUSTOM CURSOR ══════════════════════════ */
+#cur{position:fixed;width:9px;height:9px;background:var(--c);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 14px var(--c),0 0 28px rgba(0,238,255,.4);mix-blend-mode:screen;transition:width .12s,height .12s,background .12s}
+#cur-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(0,238,255,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .08s,height .08s,border-color .15s}
+body.click #cur{width:16px;height:16px;background:var(--mg);box-shadow:0 0 20px var(--mg)}
+body.hover #cur-ring{width:52px;height:52px;border-color:rgba(255,32,144,.6)}
+
+/* ══ CANVAS BG ══════════════════════════════ */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ══ OVERLAYS ════════════════════════════════ */
+.ov-scan{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);animation:scmv 12s linear infinite;opacity:.6}
+@keyframes scmv{0%{background-position:0 0}100%{background-position:0 200px}}
+.ov-vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 45%,rgba(0,0,0,.85) 100%)}
+.ov-noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+.ov-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,238,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(0,238,255,.028) 1px,transparent 1px);background-size:60px 60px;animation:gridmv 25s linear infinite}
+@keyframes gridmv{0%{background-position:0 0}100%{background-position:60px 60px}}
+
+/* ══ NAV ══════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);background:rgba(2,4,8,.82);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 36px}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--c);letter-spacing:.08em;margin-right:auto;text-shadow:0 0 20px rgba(0,238,255,.6);position:relative}
+.nav-logo::after{content:'▮';animation:blink .9s step-end infinite;margin-left:3px;font-size:10px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:10.5px;color:var(--t2);letter-spacing:.16em;text-transform:uppercase;transition:color .2s,text-shadow .2s;position:relative;padding-bottom:4px;text-decoration:none}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);transform:scaleX(0);transition:transform .3s;box-shadow:0 0 8px var(--c)}
+.nav-links a:hover,.nav-links a.active{color:var(--c);text-shadow:0 0 14px rgba(0,238,255,.7)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-cv{margin-left:30px;font-family:var(--mono);font-size:10.5px;color:var(--c);border:1px solid var(--bdrb);padding:6px 18px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;display:inline-block;position:relative;overflow:hidden;transition:color .2s,box-shadow .2s}
+.nav-cv::before{content:'';position:absolute;inset:0;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-cv:hover{color:var(--bg0);box-shadow:0 0 24px rgba(0,238,255,.4)}
+.nav-cv:hover::before{transform:scaleX(1)}
+.nav-cv span{position:relative;z-index:1}
+
+/* ══ SECTIONS ═════════════════════════════════ */
+section{position:relative;z-index:2;padding:100px 0}
+.wrap{max-width:1060px;margin:0 auto;padding:0 36px}
+
+.slabel{display:flex;align-items:center;gap:14px;margin-bottom:56px}
+.slabel-txt{font-family:var(--mono);font-size:10px;color:var(--c);letter-spacing:.3em;text-transform:uppercase;text-shadow:0 0 16px rgba(0,238,255,.6);white-space:nowrap}
+.slabel-line{flex:1;height:1px;background:linear-gradient(90deg,var(--bdrb),transparent)}
+.slabel-num{font-family:var(--mono);font-size:10px;color:var(--t3)}
+
+/* ══ GLITCH ═══════════════════════════════════ */
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.glitch::before{color:var(--mg);animation:gl1 5s infinite;clip-path:polygon(0 20%,100% 20%,100% 45%,0 45%);mix-blend-mode:screen}
+.glitch::after{color:var(--c);animation:gl2 5s infinite;clip-path:polygon(0 55%,100% 55%,100% 80%,0 80%);mix-blend-mode:screen}
+@keyframes gl1{0%,87%,100%{transform:translate(0);opacity:0}88%{transform:translate(-4px,1px);opacity:1}90%{transform:translate(4px,-2px);opacity:1}92%{transform:translate(-2px,1px);opacity:1}94%{transform:translate(0);opacity:0}}
+@keyframes gl2{0%,87%,100%{transform:translate(0);opacity:0}89%{transform:translate(4px,2px);opacity:1}91%{transform:translate(-4px,-1px);opacity:1}93%{transform:translate(2px,0);opacity:1}95%{transform:translate(0);opacity:0}}
+
+/* ══ BUTTONS ══════════════════════════════════ */
+.btn-p{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bg0);background:var(--c);padding:13px 30px;display:inline-block;text-decoration:none;position:relative;overflow:hidden;transition:box-shadow .25s;box-shadow:0 0 20px rgba(0,238,255,.25)}
+.btn-p::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:shimmer 2.5s infinite}
+@keyframes shimmer{to{left:150%}}
+.btn-p:hover{box-shadow:0 0 40px rgba(0,238,255,.6),0 0 80px rgba(0,238,255,.2)}
+.btn-g{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);border:1px solid var(--bdrb);padding:13px 30px;display:inline-block;text-decoration:none;transition:all .25s;position:relative;overflow:hidden}
+.btn-g::before{content:'';position:absolute;inset:0;background:var(--cg);transform:translateY(101%);transition:transform .25s}
+.btn-g:hover{box-shadow:0 0 24px rgba(0,238,255,.2)}
+.btn-g:hover::before{transform:translateY(0)}
+.btn-g span{position:relative;z-index:1}
+
+/* ══ FADE ANIM ════════════════════════════════ */
+.fu{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+.fu.d1{transition-delay:.1s}.fu.d2{transition-delay:.2s}.fu.d3{transition-delay:.3s}.fu.d4{transition-delay:.4s}
+
+/* ══════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════ */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:var(--nav);overflow:hidden}
+
+/* horizontal sweep beam */
+.beam{position:absolute;left:-50%;right:-50%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,238,255,.0) 30%,rgba(0,238,255,.6) 50%,rgba(0,238,255,.0) 70%,transparent 100%);pointer-events:none;animation:beamsweep 6s ease-in-out infinite}
+@keyframes beamsweep{0%{top:10%;opacity:0}30%{opacity:1}70%{opacity:1}100%{top:90%;opacity:0}}
+
+/* hex grid decoration */
+.hex-deco{position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:500px;height:500px;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0-8l20-11.5V22.5L28 11 8 22.5v24L28 58z' fill='%2300eeff'/%3E%3C/svg%3E");background-size:56px 100px;pointer-events:none}
+
+.hero-inner{display:grid;grid-template-columns:1fr 200px;gap:56px;align-items:center;width:100%}
+.hero-pre{font-family:var(--mono);font-size:11px;color:var(--c);letter-spacing:.22em;margin-bottom:18px;opacity:.7}
+.hero-name{font-family:var(--disp);font-weight:700;font-size:clamp(50px,8vw,90px);line-height:.88;letter-spacing:.03em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.hero-name em{color:var(--c);font-style:normal;display:block;text-shadow:0 0 40px rgba(0,238,255,.45),0 0 80px rgba(0,238,255,.2)}
+.hero-role{font-family:var(--mono);font-size:11.5px;color:var(--t1);letter-spacing:.1em;margin-bottom:28px;line-height:2.1}
+.rsp{color:var(--mg);margin:0 9px;font-size:8px;text-shadow:0 0 8px var(--mg);vertical-align:middle}
+.hero-bio{font-size:15px;color:var(--t1);max-width:530px;line-height:1.82;margin-bottom:36px;font-weight:300}
+.hero-bio strong{color:var(--t0);font-weight:500}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.hero-status{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:.08em}
+.sdot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green),0 0 20px rgba(0,255,159,.35);animation:sdotpulse 2s ease infinite}
+@keyframes sdotpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.7);opacity:.5}}
+
+/* stats panel */
+.hero-stats{display:flex;flex-direction:column;gap:3px}
+.stat{background:var(--bg2);border:1px solid var(--bdr);border-left:2px solid var(--c);padding:16px 18px;transition:all .25s;cursor:default;position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cg),transparent 60%);opacity:0;transition:opacity .3s}
+.stat:hover{background:var(--bg3);border-left-color:var(--mg)}
+.stat:hover::after{opacity:1}
+.stat:hover .stat-n{color:var(--mg);text-shadow:0 0 24px rgba(255,32,144,.6)}
+.stat-n{font-family:var(--disp);font-weight:700;font-size:38px;color:var(--c);line-height:1;text-shadow:0 0 24px rgba(0,238,255,.5);transition:all .25s}
+.stat-l{font-family:var(--mono);font-size:8.5px;color:var(--t2);letter-spacing:.16em;text-transform:uppercase;margin-top:4px}
+
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 3s ease infinite}
+.sh-txt{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:.22em;text-transform:uppercase}
+.sh-line{width:1px;height:36px;background:linear-gradient(180deg,var(--t3),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+/* ══════════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════════ */
+#about{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg0) 100%)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.about-h{font-family:var(--disp);font-weight:700;font-size:36px;color:#fff;letter-spacing:.04em;margin-bottom:22px;line-height:1.1;text-transform:uppercase}
+.about-h span{color:var(--c);text-shadow:0 0 20px rgba(0,238,255,.4)}
+.about-p{color:var(--t1);font-weight:300;margin-bottom:14px;font-size:14.5px;line-height:1.8}
+.about-p strong{color:var(--t0);font-weight:500}
+.hlist{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.hitem{display:flex;align-items:flex-start;gap:12px;font-size:13.5px;color:var(--t1);padding:9px 12px;background:rgba(0,238,255,.03);border:1px solid rgba(0,238,255,.07);transition:background .2s,border-color .2s}
+.hitem:hover{background:rgba(0,238,255,.06);border-color:rgba(0,238,255,.15)}
+.hitem::before{content:'▸';color:var(--mg);font-size:11px;flex-shrink:0;margin-top:2px;text-shadow:0 0 8px var(--mg)}
+
+.facts{display:flex;flex-direction:column;gap:1px}
+.fact{display:flex;align-items:baseline;background:var(--bg2);border:1px solid var(--bdr);padding:11px 16px;transition:all .2s;position:relative;overflow:hidden}
+.fact-bar{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c);transform:scaleY(0);transform-origin:top;transition:transform .35s}
+.fact:hover{background:var(--bg3)}
+.fact:hover .fact-bar{transform:scaleY(1)}
+.fk{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.12em;text-transform:uppercase;width:108px;flex-shrink:0}
+.fv{font-size:13px;color:var(--t0)}
+.fv a{color:var(--c);text-decoration:none;transition:text-shadow .2s}
+.fv a:hover{text-shadow:0 0 12px var(--c)}
+
+/* ══════════════════════════════════════════════
+   STACK
+══════════════════════════════════════════════ */
+#stack{background:var(--bg0)}
+.stack-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,238,255,.07);border:1px solid rgba(0,238,255,.07)}
+.scell{background:var(--bg1);padding:26px 22px;transition:background .25s;position:relative;overflow:hidden}
+.scell::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:0;transition:opacity .3s}
+.scell:hover{background:var(--bg2)}
+.scell:hover::before{opacity:1}
+.sc-icon{font-family:var(--mono);font-size:10.5px;color:var(--c);margin-bottom:10px;letter-spacing:.1em;text-shadow:0 0 12px rgba(0,238,255,.5)}
+.sc-title{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--t0);letter-spacing:.07em;text-transform:uppercase;margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-family:var(--mono);font-size:9.5px;padding:3px 8px;border:1px solid rgba(0,238,255,.14);color:rgba(0,238,255,.62);background:rgba(0,238,255,.04);letter-spacing:.04em;white-space:nowrap;transition:all .2s;cursor:default}
+.tag:hover{border-color:rgba(0,238,255,.55);background:rgba(0,238,255,.12);color:var(--c);box-shadow:0 0 8px rgba(0,238,255,.18)}
+.tag.hot{color:rgba(255,32,144,.85);border-color:rgba(255,32,144,.24);background:rgba(255,32,144,.05)}
+.tag.hot:hover{box-shadow:0 0 8px rgba(255,32,144,.3);color:var(--mg)}
+.tag.warm{color:rgba(245,197,24,.82);border-color:rgba(245,197,24,.2);background:rgba(245,197,24,.05)}
+
+/* ══════════════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════════════ */
+#projects{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg0) 100%)}
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.pcard{background:var(--bg2);border:1px solid var(--bdr);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .28s,border-color .28s,box-shadow .28s}
+.pcard:hover{transform:translateY(-5px)}
+/* corner brackets on hover */
+.pcard::after{content:'';position:absolute;inset:6px;border:1px solid transparent;transition:border-color .3s;pointer-events:none}
+.pcard:hover::after{border-color:rgba(0,238,255,.08)}
+/* color top bar */
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:box-shadow .3s}
+.c-c::before{background:var(--c)}.pcard.c-c:hover{border-color:rgba(0,238,255,.38);box-shadow:0 12px 48px rgba(0,238,255,.08)}.c-c:hover::before{box-shadow:0 0 24px var(--c),0 2px 24px rgba(0,238,255,.4)}
+.c-m::before{background:var(--mg)}.pcard.c-m:hover{border-color:rgba(255,32,144,.35);box-shadow:0 12px 48px rgba(255,32,144,.08)}.c-m:hover::before{box-shadow:0 0 24px var(--mg),0 2px 24px rgba(255,32,144,.4)}
+.c-g::before{background:var(--green)}.pcard.c-g:hover{border-color:rgba(0,255,159,.3);box-shadow:0 12px 48px rgba(0,255,159,.07)}.c-g:hover::before{box-shadow:0 0 20px var(--green)}
+.c-gold::before{background:var(--gold)}.pcard.c-gold:hover{border-color:rgba(245,197,24,.3);box-shadow:0 12px 48px rgba(245,197,24,.07)}.c-gold:hover::before{box-shadow:0 0 20px var(--gold)}
+.c-p::before{background:var(--purple)}.pcard.c-p:hover{border-color:rgba(181,109,255,.3);box-shadow:0 12px 48px rgba(181,109,255,.07)}.c-p:hover::before{box-shadow:0 0 20px var(--purple)}
+
+.pi{padding:26px;flex:1;display:flex;flex-direction:column}
+.ptype{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--t2);margin-bottom:10px}
+.pname{font-family:var(--disp);font-weight:700;font-size:21px;color:#fff;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;line-height:1.15}
+.pdesc{font-size:12.5px;color:var(--t1);line-height:1.7;font-weight:300;flex:1;margin-bottom:16px}
+.pdesc strong{color:var(--t0);font-weight:400}
+.ptags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px}
+.ptag{font-family:var(--mono);font-size:8.5px;padding:2px 7px;color:rgba(0,238,255,.55);border:1px solid rgba(0,238,255,.12);background:rgba(0,238,255,.04)}
+.plinks{display:flex;gap:14px;border-top:1px solid var(--bdr);padding-top:14px}
+.plink{font-family:var(--mono);font-size:9.5px;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:color .2s,text-shadow .2s;text-decoration:none}
+.plink:hover{color:var(--c);text-shadow:0 0 10px var(--c)}
+.plink svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* featured */
+.feat{grid-column:span 2}
+.feat .pi{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.feat .pbody{display:flex;flex-direction:column}
+.feat .pname{font-size:28px}
+
+.codeblk{background:var(--bg0);border:1px solid rgba(0,238,255,.1);padding:17px;font-family:var(--mono);font-size:9.5px;line-height:1.95;position:relative;overflow:hidden}
+.codeblk::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,238,255,.3),transparent)}
+.ck{color:var(--c)}.cf{color:var(--gold)}.cs{color:var(--green)}.cn{color:var(--mg)}.cm{color:var(--t3)}.cv{color:var(--t0)}
+.sys-rows{background:var(--bg0);border:1px solid rgba(0,238,255,.1);padding:13px;display:flex;flex-direction:column;gap:8px}
+.srow{display:flex;justify-content:space-between;align-items:center}
+.sr-lbl{font-family:var(--mono);font-size:8.5px;color:var(--t2);letter-spacing:.1em}
+.sr-on{font-family:var(--mono);font-size:8.5px;color:var(--green)}
+.sr-wip{font-family:var(--mono);font-size:8.5px;color:var(--gold)}
+.sr-plan{font-family:var(--mono);font-size:8.5px;color:var(--mg)}
+
+/* ══════════════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════════════ */
+#experience{background:var(--bg0)}
+.etl{position:relative;padding-left:32px}
+.etl::before{content:'';position:absolute;left:0;top:10px;bottom:0;width:1px;background:linear-gradient(180deg,rgba(0,238,255,.5) 0%,transparent 100%)}
+
+.eentry{position:relative;margin-bottom:48px}
+.eentry::before{content:'';position:absolute;left:-32px;top:10px;width:9px;height:9px;border:1px solid var(--c);background:var(--bg0);transform:rotate(45deg);box-shadow:0 0 14px rgba(0,238,255,.5),inset 0 0 4px rgba(0,238,255,.2);transition:all .3s}
+.eentry:hover::before{background:var(--c);box-shadow:0 0 24px rgba(0,238,255,.9)}
+
+.emeta{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.eco{font-family:var(--disp);font-weight:700;font-size:20px;color:#fff;letter-spacing:.05em;text-transform:uppercase}
+.edate{font-family:var(--mono);font-size:9.5px;color:var(--c);border:1px solid rgba(0,238,255,.2);background:rgba(0,238,255,.05);padding:3px 10px;letter-spacing:.08em;white-space:nowrap}
+.erole{font-family:var(--mono);font-size:10.5px;color:var(--mg);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;text-shadow:0 0 12px rgba(255,32,144,.35)}
+.eprojs{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.eproj{background:var(--bg2);border-left:2px solid rgba(0,238,255,.18);padding:11px 14px;transition:border-color .2s,background .2s}
+.eproj:hover{border-left-color:var(--c);background:var(--bg3)}
+.epn{font-family:var(--mono);font-size:10px;color:var(--c);letter-spacing:.07em;margin-bottom:4px}
+.epd{font-size:12.5px;color:var(--t1);font-weight:300;line-height:1.65}
+.etags{display:flex;flex-wrap:wrap;gap:4px}
+.etag{font-family:var(--mono);font-size:8.5px;color:var(--t3);border:1px solid var(--t3);background:rgba(29,46,66,.3);padding:2px 7px}
+
+/* ══════════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════════ */
+#contact{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg0) 100%);text-align:center}
+
+/* big glow behind heading */
+.contact-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(0,238,255,.04) 0%,transparent 70%);pointer-events:none}
+
+.ch{font-family:var(--disp);font-weight:700;font-size:clamp(32px,5vw,60px);color:#fff;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px;position:relative}
+.ch span{color:var(--c);text-shadow:0 0 36px rgba(0,238,255,.5)}
+.csub{font-size:14.5px;color:var(--t1);max-width:440px;margin:0 auto 44px;font-weight:300}
+.clinks{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+.clink{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;color:var(--t1);border:1px solid var(--bdr);background:var(--bg2);padding:13px 22px;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;text-decoration:none;position:relative;overflow:hidden}
+.clink::before{content:'';position:absolute;inset:0;background:var(--cg);transform:translateY(101%);transition:transform .25s}
+.clink:hover{border-color:var(--bdrb);color:var(--c);box-shadow:0 0 24px rgba(0,238,255,.12)}
+.clink:hover::before{transform:translateY(0)}
+.clink span,.clink svg{position:relative;z-index:1}
+.clink svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+.avbox{display:inline-flex;align-items:center;gap:11px;border:1px solid rgba(0,255,159,.2);background:rgba(0,255,159,.04);padding:14px 28px;font-family:var(--mono);font-size:10.5px;color:var(--green);letter-spacing:.12em;box-shadow:0 0 24px rgba(0,255,159,.07)}
+.avdot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green),0 0 22px rgba(0,255,159,.4);animation:sdotpulse 2s ease infinite}
+
+/* ══ FOOTER ════════════════════════════════════ */
+footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
+.fc{font-family:var(--mono);font-size:9.5px;color:var(--t3);letter-spacing:.1em}
+.fc span{color:var(--c)}
+
+/* ══ RESPONSIVE ════════════════════════════════ */
+@media(max-width:768px){
+  .hero-inner,.about-grid{grid-template-columns:1fr}
+  .hero-stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .stack-wrap,.pgrid{grid-template-columns:1fr}
+  .feat{grid-column:span 1}
+  .feat .pi{grid-template-columns:1fr}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .wrap{padding:0 20px}
+  body{cursor:auto}
+  #cur,#cur-ring{display:none}
+  section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- BG canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- overlays -->
+<div class="ov-scan"></div>
+<div class="ov-vignette"></div>
+<div class="ov-noise"></div>
+<div class="ov-grid"></div>
+
+<!-- cursor -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- ════ NAV ══════════════════════════════════ -->
+<nav>
+  <div class="nav-logo"><span style="color:var(--t2)">//</span> john_ortiz<span style="color:var(--t3)">.dev</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Proyectos</a></li>
+    <li><a href="#experience">Experiencia</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <a href="john_ortiz_cv_v2.html" class="nav-cv" target="_blank"><span>↗ Ver CV</span></a>
+</nav>
+
+<!-- ════ HERO ══════════════════════════════════ -->
+<section id="hero">
+  <div class="beam"></div>
+  <div class="hex-deco"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-pre">// Software Engineer · Talca, Chile · Disponible</div>
+        <h1 class="hero-name">
+          <span class="glitch" data-text="John">John</span>
+          <em class="glitch" data-text="Ortiz">Ortiz</em>
+        </h1>
+        <div class="hero-role">
+          Java · Spring Boot<span class="rsp">◆</span>Angular · React<span class="rsp">◆</span>Microservicios<span class="rsp">◆</span>IoT
+        </div>
+        <p class="hero-bio">Ingeniero en Computación e Informática con <strong>más de 7 años</strong> construyendo sistemas de alto impacto para el sector público y privado. Apasionado por la arquitectura robusta y los proyectos donde convergen <strong>software y hardware</strong>.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-p">Ver proyectos</a>
+          <a href="#contact" class="btn-g"><span>Contactar</span></a>
+        </div>
+        <div class="hero-status">
+          <div class="sdot"></div>
+          <span id="tw-out"></span><span style="border-right:2px solid var(--c);animation:blink .8s step-end infinite">&nbsp;</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-n" data-target="7">0</div><div class="stat-l">Años exp.</div></div>
+        <div class="stat"><div class="stat-n" data-target="15">0</div><div class="stat-l">Proyectos</div></div>
+        <div class="stat"><div class="stat-n" data-target="30">0</div><div class="stat-l">Tecnologías</div></div>
+        <div class="stat"><div class="stat-n" data-target="5">0</div><div class="stat-l">Empresas</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="sh-txt">scroll</div>
+    <div class="sh-line"></div>
+  </div>
+</section>
+
+<!-- ════ ABOUT ══════════════════════════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="slabel"><span class="slabel-txt">Sobre mí</span><div class="slabel-line"></div><span class="slabel-num">01</span></div>
+    <div class="about-grid">
+      <div class="fu">
+        <h2 class="about-h">Full Stack Dev<br>con raíces en <span>electrónica</span></h2>
+        <p class="about-p">Soy Ingeniero en Computación e Informática de la U. Católica del Maule. Empecé diseñando circuitos y programando microcontroladores — eso me dio una perspectiva distinta: entiendo el sistema desde la capa física hasta la nube.</p>
+        <p class="about-p">Trabajo principalmente con <strong>Java, Spring Boot y Angular</strong> en plataformas enterprise, y también tengo proyectos en React Native, Game Dev en JS y electrónica maker.</p>
+        <p class="about-p">Me mueve resolver problemas reales con código bien hecho — arquitectura limpia, APIs confiables, y frontends que la gente disfruta usar.</p>
+        <div class="hlist">
+          <div class="hitem">Microservicios y APIs REST/SOAP/HL7 para industrias reguladas</div>
+          <div class="hitem">Full Stack moderno: Spring Boot + Angular, Node.js + React/Vue</div>
+          <div class="hitem">Formación dual: Ingeniero en software + Técnico en electrónica</div>
+          <div class="hitem">Proyectos personales activos: Game Dev, apps móviles, IoT maker</div>
+        </div>
+      </div>
+      <div class="fu d2">
+        <div class="facts">
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Ubicación</span><span class="fv">Talca, Chile 🇨🇱</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Experiencia</span><span class="fv">7+ años profesionales</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Especialidad</span><span class="fv">Java · Spring Boot · Angular</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">También</span><span class="fv">Node.js · React · Vue.js</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Idiomas</span><span class="fv">Español nativo · Inglés B1</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">GitHub</span><span class="fv"><a href="https://github.com/deathztalker" target="_blank">@deathztalker</a></span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">LinkedIn</span><span class="fv"><a href="https://linkedin.com/in/john-ortiz" target="_blank">john-ortiz</a></span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Email</span><span class="fv"><a href="mailto:johnpro38@gmail.com">johnpro38@gmail.com</a></span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Status</span><span class="fv" style="color:var(--green)">Open to work ✓</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STACK ══════════════════════════════════ -->
+<section id="stack">
+  <div class="wrap">
+    <div class="slabel"><span class="slabel-txt">Stack Tecnológico</span><div class="slabel-line"></div><span class="slabel-num">02</span></div>
+    <div class="stack-wrap fu">
+      <div class="scell"><div class="sc-icon">&lt;/&gt; Lenguajes</div><div class="sc-title">Languages</div><div class="tags"><span class="tag hot">Java</span><span class="tag hot">JavaScript</span><span class="tag hot">TypeScript</span><span class="tag">C#</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">C/C++</span><span class="tag">VB.NET</span></div></div>
+      <div class="scell"><div class="sc-icon">⚙ Backend</div><div class="sc-title">Backend & APIs</div><div class="tags"><span class="tag hot">Spring Boot</span><span class="tag hot">Node.js</span><span class="tag">Express.js</span><span class="tag">Spring Security</span><span class="tag">JPA/Hibernate</span><span class="tag">CodeIgniter</span><span class="tag">Liferay</span><span class="tag">REST</span><span class="tag">SOAP</span><span class="tag">HL7/FHIR</span></div></div>
+      <div class="scell"><div class="sc-icon">◨ Frontend</div><div class="sc-title">Frontend & Mobile</div><div class="tags"><span class="tag hot">Angular</span><span class="tag">React</span><span class="tag">Vue.js</span><span class="tag">React Native</span><span class="tag">RxJS</span><span class="tag">Vite</span><span class="tag">ExtJS</span><span class="tag">HTML5/CSS3</span></div></div>
+      <div class="scell"><div class="sc-icon">◈ Datos</div><div class="sc-title">Bases de Datos</div><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">SQL Server</span><span class="tag">Oracle</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">PL-SQL</span></div></div>
+      <div class="scell"><div class="sc-icon">☁ Cloud</div><div class="sc-title">DevOps & Cloud</div><div class="tags"><span class="tag warm">Docker</span><span class="tag warm">Kubernetes</span><span class="tag warm">Jenkins</span><span class="tag warm">CI/CD</span><span class="tag">Git/GitHub</span><span class="tag">GCP</span><span class="tag">AWS</span><span class="tag">Linux</span><span class="tag">Scrum</span></div></div>
+      <div class="scell"><div class="sc-icon">⌁ Hardware</div><div class="sc-title">Hardware & IoT</div><div class="tags"><span class="tag">Arduino</span><span class="tag">PCB Design</span><span class="tag">GPS/GPRS</span><span class="tag">Blender</span><span class="tag">123D Design</span><span class="tag">3D Print</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROJECTS ════════════════════════════════ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="slabel"><span class="slabel-txt">Proyectos</span><div class="slabel-line"></div><span class="slabel-num">03</span></div>
+    <div class="pgrid">
+
+      <!-- FEATURED DarkRealm -->
+      <div class="pcard feat c-m fu">
+        <div class="pi">
+          <div class="pbody">
+            <div class="ptype">// Proyecto Personal · Game Dev · JS</div>
+            <div class="pname">DarkRealm RPG</div>
+            <p class="pdesc">Videojuego RPG desarrollado en <strong>JavaScript puro</strong>. Sistema de combate por turnos, mapa explorable, inventario, stats y múltiples clases de personaje. Arquitectura OOP con patrones State, Observer y Factory. Deploy en GitHub Pages.</p>
+            <div class="ptags"><span class="ptag">JavaScript</span><span class="ptag">HTML5 Canvas</span><span class="ptag">CSS3</span><span class="ptag">OOP</span><span class="ptag">Game Loop</span><span class="ptag">GitHub Pages</span></div>
+            <div class="plinks">
+              <a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Ver en GitHub</a>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
+            <div class="codeblk">
+              <div class="cm">// game_engine.js</div>
+              <div><span class="ck">class</span> <span class="cf">Hero</span> {</div>
+              <div>&nbsp; hp = <span class="cn">100</span>; mp = <span class="cn">50</span>;</div>
+              <div>&nbsp; name = <span class="cs">"DarkRealm"</span>;</div>
+              <div>&nbsp; <span class="ck">constructor</span>(<span class="cv">cls</span>) {</div>
+              <div>&nbsp;&nbsp;&nbsp; <span class="ck">this</span>.class = <span class="cv">cls</span>;</div>
+              <div>&nbsp;&nbsp;&nbsp; <span class="ck">this</span>.init();</div>
+              <div>&nbsp; }</div>
+              <div>&nbsp; <span class="cf">attack</span>(<span class="cv">target</span>) {</div>
+              <div>&nbsp;&nbsp;&nbsp; <span class="cm">// ⚔ enter the realm</span></div>
+              <div>&nbsp;&nbsp;&nbsp; <span class="ck">return</span> <span class="ck">this</span>.dmg * <span class="cn">1.5</span>;</div>
+              <div>&nbsp; }</div>
+              <div>}</div>
+            </div>
+            <div class="sys-rows">
+              <div class="srow"><span class="sr-lbl">COMBAT_SYS</span><span class="sr-on">● ACTIVE</span></div>
+              <div class="srow"><span class="sr-lbl">WORLD_MAP</span><span class="sr-on">● ACTIVE</span></div>
+              <div class="srow"><span class="sr-lbl">INVENTORY</span><span class="sr-on">● ACTIVE</span></div>
+              <div class="srow"><span class="sr-lbl">SAVE_SYS</span><span class="sr-wip">⟳ WIP</span></div>
+              <div class="srow"><span class="sr-lbl">MULTIPLAYER</span><span class="sr-plan">○ PLANNED</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pcard c-c fu d1">
+        <div class="pi">
+          <div class="ptype">// Personal · Mobile</div>
+          <div class="pname">Mobile Apps<br>React Native</div>
+          <p class="pdesc">Apps cross-platform con <strong>React Native</strong>. Navegación, APIs REST, gestión de estado y componentes nativos. iOS y Android desde una sola codebase.</p>
+          <div class="ptags"><span class="ptag">React Native</span><span class="ptag">JavaScript</span><span class="ptag">REST API</span><span class="ptag">Expo</span></div>
+          <div class="plinks"><a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></div>
+        </div>
+      </div>
+
+      <div class="pcard c-gold fu d2">
+        <div class="pi">
+          <div class="ptype">// Personal · Hardware / IoT</div>
+          <div class="pname">IoT Maker<br>& Arduino</div>
+          <p class="pdesc">Diseño de <strong>PCBs</strong>, firmware C/C++ para Arduino, carcasas en 3D y kits de <strong>geolocalización GPS/GPRS</strong> para tracking vehicular.</p>
+          <div class="ptags"><span class="ptag">Arduino</span><span class="ptag">C/C++</span><span class="ptag">PCB Design</span><span class="ptag">GPS/GPRS</span><span class="ptag">Blender</span></div>
+          <div class="plinks"><a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></div>
+        </div>
+      </div>
+
+      <div class="pcard c-g fu">
+        <div class="pi">
+          <div class="ptype">// Trabajo · Sector Público</div>
+          <div class="pname">Plataformas<br>Sector Público</div>
+          <p class="pdesc">Sistemas para <strong>Contraloría, Superintendencias y SII</strong>. Auditoría documental, fiscalización e integración tributaria con foco en robustez y cumplimiento normativo.</p>
+          <div class="ptags"><span class="ptag">Liferay</span><span class="ptag">Spring Boot</span><span class="ptag">Vue.js</span><span class="ptag">VB.NET</span><span class="ptag">SOAP/REST</span></div>
+          <div class="plinks"><span class="plink" style="opacity:.38;cursor:default">NDA — código privado</span></div>
+        </div>
+      </div>
+
+      <div class="pcard c-p fu d1">
+        <div class="pi">
+          <div class="ptype">// Trabajo · SaaS Interno</div>
+          <div class="pname">Fleet Manager<br>& Geo Tracking</div>
+          <p class="pdesc">Sistema de arriendo de vehículos con contratos y facturación. Módulo de <strong>geolocalización en tiempo real</strong> con Leaflet y Google Maps.</p>
+          <div class="ptags"><span class="ptag">PHP</span><span class="ptag">CodeIgniter</span><span class="ptag">SQL Server</span><span class="ptag">Leaflet</span><span class="ptag">GPS API</span></div>
+          <div class="plinks"><span class="plink" style="opacity:.38;cursor:default">NDA — código privado</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXPERIENCE ══════════════════════════════ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="slabel"><span class="slabel-txt">Experiencia</span><div class="slabel-line"></div><span class="slabel-num">04</span></div>
+    <div class="etl">
+
+      <div class="eentry fu">
+        <div class="emeta"><div class="eco">NTT DATA Chile S.A.</div><div class="edate">DIC 2023 → PRESENTE</div></div>
+        <div class="erole">// Software Engineer</div>
+        <div class="eprojs">
+          <div class="eproj"><div class="epn">LATAM Airlines</div><div class="epd">Microservicios Spring Boot + Angular/RxJS para gestión de flota y pasajeros. Infraestructura GCP, CI/CD con Docker y Jenkins bajo Scrum.</div></div>
+          <div class="eproj"><div class="epn">EHCOS — Suite Hospitalaria</div><div class="epd">APIs RESTful para historiales clínicos electrónicos. Integración con sistemas legados via HL7/FHIR. Spring Security para protección de datos sensibles.</div></div>
+        </div>
+        <div class="etags"><span class="etag">Spring Boot</span><span class="etag">Angular</span><span class="etag">GCP</span><span class="etag">Docker</span><span class="etag">Jenkins</span><span class="etag">HL7/FHIR</span><span class="etag">RxJS</span><span class="etag">Microservicios</span><span class="etag">Scrum</span></div>
+      </div>
+
+      <div class="eentry fu">
+        <div class="emeta"><div class="eco">ValpoSystems Ltda.</div><div class="edate">OCT 2022 → DIC 2023</div></div>
+        <div class="erole">// Analista Programador Full Stack</div>
+        <div class="eprojs">
+          <div class="eproj"><div class="epn">Contraloría · Superintendencias · SII</div><div class="epd">Auditoría documental, fiscalización e integración tributaria. Stacks: Liferay, VB.NET, Java/Solaris, Vue.js + Spring Boot.</div></div>
+          <div class="eproj"><div class="epn">Kaufmann / Club Mercedes</div><div class="epd">Sistema de gestión comercial con procesos ETL sobre portal Liferay.</div></div>
+        </div>
+        <div class="etags"><span class="etag">Liferay</span><span class="etag">Vue.js</span><span class="etag">Spring Boot</span><span class="etag">VB.NET</span><span class="etag">Java</span><span class="etag">PostgreSQL</span><span class="etag">REST/SOAP</span></div>
+      </div>
+
+      <div class="eentry fu">
+        <div class="emeta"><div class="eco">Firma Abogados Chile SpA</div><div class="edate">OCT 2021 → OCT 2022</div></div>
+        <div class="erole">// Desarrollador Full Stack</div>
+        <div class="eprojs">
+          <div class="eproj"><div class="epn">Sistema Arriendo + Geolocalización de Flota</div><div class="epd">PHP/CodeIgniter para contratos y facturación. Tracking vehicular en tiempo real con Leaflet, ExtJS y Google Maps.</div></div>
+        </div>
+        <div class="etags"><span class="etag">PHP</span><span class="etag">CodeIgniter</span><span class="etag">SQL Server</span><span class="etag">ExtJS</span><span class="etag">Leaflet</span><span class="etag">GPS API</span></div>
+      </div>
+
+      <div class="eentry fu">
+        <div class="emeta"><div class="eco">CEHO Servicios</div><div class="edate">NOV 2018 → OCT 2021</div></div>
+        <div class="erole">// Técnico en Terreno TI / Electrónica</div>
+        <div class="eprojs">
+          <div class="eproj"><div class="epn">TotalPack Ltda. — Soporte Nacional</div><div class="epd">Instalación y mantención de turnomáticos, autoservicios y relojes control. Soporte en terreno nacional, redes y conectividad.</div></div>
+        </div>
+        <div class="etags"><span class="etag">Electrónica</span><span class="etag">BD Embebidas</span><span class="etag">Redes</span><span class="etag">Hardware</span></div>
+      </div>
+
+      <div class="eentry fu">
+        <div class="emeta"><div class="eco">Mobiquos Ltda.</div><div class="edate">JUN 2018 → OCT 2018</div></div>
+        <div class="erole">// Técnico Electro-Informático</div>
+        <div class="eprojs">
+          <div class="eproj"><div class="epn">Kits IoT & PCB Design</div><div class="epd">Diseño de PCBs, firmware C/C++ para Arduino, modelado 3D, kits GPS/GPRS para tracking vehicular.</div></div>
+        </div>
+        <div class="etags"><span class="etag">Arduino</span><span class="etag">C/C++</span><span class="etag">PCB Design</span><span class="etag">GPS/GPRS</span><span class="etag">Blender</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT ══════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="wrap">
+    <div class="slabel"><span class="slabel-txt">Contacto</span><div class="slabel-line"></div><span class="slabel-num">05</span></div>
+    <h2 class="ch fu">¿Hablamos de tu <span>proyecto</span>?</h2>
+    <p class="csub fu d1">Abierto a oportunidades laborales, proyectos freelance y colaboraciones. Respondo en menos de 24 horas.</p>
+    <div class="clinks fu d2">
+      <a href="mailto:johnpro38@gmail.com" class="clink"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>johnpro38@gmail.com</span></a>
+      <a href="https://github.com/deathztalker" target="_blank" class="clink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>github/deathztalker</span></a>
+      <a href="https://linkedin.com/in/john-ortiz" target="_blank" class="clink"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span>LinkedIn</span></a>
+      <a href="tel:+56981561929" class="clink"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+569 8156 1929</span></a>
+    </div>
+    <div class="avbox fu d3"><div class="avdot"></div>Disponible para nuevas oportunidades — Talca, Chile · Remoto OK</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fc"><span>//</span> john_ortiz · 2026</div>
+  <div class="fc">Software Engineer · <span>Full Stack</span> · Talca CL</div>
+  <div class="fc">built with <span>HTML · CSS · JS</span></div>
+</footer>
+
+<script>
+/* ══ CURSOR ═══════════════════════════════════ */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animR(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animR)})();
+document.addEventListener('mousedown',()=>document.body.classList.add('click'));
+document.addEventListener('mouseup',()=>document.body.classList.remove('click'));
+document.querySelectorAll('a,button,.stat,.pcard,.fact,.tag,.hitem').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hover'));
+});
+
+/* ══ CANVAS — particles + lightning + hex ═════ */
+const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+
+// particles
+class Particle{
+  constructor(){this.reset(true)}
+  reset(init){
+    this.x=Math.random()*W;
+    this.y=init?Math.random()*H:H+5;
+    this.vx=(Math.random()-.5)*.35;
+    this.vy=-(Math.random()*.55+.08);
+    this.r=Math.random()*1.6+.2;
+    this.alpha=Math.random()*.55+.1;
+    this.hue=Math.random()<.72?'0,238,255':'255,32,144';
+    this.life=1;this.dec=Math.random()*.0025+.0008;
+  }
+  step(){this.x+=this.vx;this.y+=this.vy;this.life-=this.dec;if(this.life<=0||this.y<-5)this.reset(false)}
+  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(${this.hue},${this.alpha*this.life})`;ctx.fill()}
+}
+const PARTS=[];for(let i=0;i<140;i++)PARTS.push(new Particle());
+
+// lightning bolts occasional
+let bolts=[];
+function spawnBolt(){
+  const x=Math.random()*W;
+  const segs=[];let cx=x,cy=0;
+  while(cy<H*.7){const len=Math.random()*60+20;const angle=(Math.random()-.5)*1.2+Math.PI*.5;cx+=Math.cos(angle)*len;cy+=Math.sin(angle)*len;segs.push({x:cx,y:cy})}
+  bolts.push({segs,x,alpha:1,life:1,hue:Math.random()<.7?'0,238,255':'255,32,144'});
+}
+setInterval(()=>{if(Math.random()<.35)spawnBolt()},2800);
+
+// nebula blobs
+const blobs=[
+  {x:.2,y:.3,r:320,c:'0,238,255',a:.028},
+  {x:.8,y:.7,r:280,c:'255,32,144',a:.022},
+  {x:.5,y:.5,r:400,c:'181,109,255',a:.015},
+];
+
+// mouse-reactive glow
+let mouseGlow={x:W/2,y:H/2};
+document.addEventListener('mousemove',e=>{mouseGlow.x=e.clientX;mouseGlow.y=e.clientY});
+
+function drawFrame(){
+  ctx.clearRect(0,0,W,H);
+
+  // nebula
+  blobs.forEach(b=>{
+    const g=ctx.createRadialGradient(b.x*W,b.y*H,0,b.x*W,b.y*H,b.r);
+    g.addColorStop(0,`rgba(${b.c},${b.a})`);g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(b.x*W,b.y*H,b.r,0,Math.PI*2);ctx.fill();
+  });
+
+  // mouse glow
+  const mg2=ctx.createRadialGradient(mouseGlow.x,mouseGlow.y,0,mouseGlow.x,mouseGlow.y,180);
+  mg2.addColorStop(0,'rgba(0,238,255,.04)');mg2.addColorStop(1,'transparent');
+  ctx.fillStyle=mg2;ctx.beginPath();ctx.arc(mouseGlow.x,mouseGlow.y,180,0,Math.PI*2);ctx.fill();
+
+  // particles + connections
+  PARTS.forEach(p=>{p.step();p.draw()});
+  for(let i=0;i<PARTS.length;i++){
+    for(let j=i+1;j<PARTS.length;j++){
+      const dx=PARTS[i].x-PARTS[j].x,dy=PARTS[i].y-PARTS[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){ctx.beginPath();ctx.moveTo(PARTS[i].x,PARTS[i].y);ctx.lineTo(PARTS[j].x,PARTS[j].y);ctx.strokeStyle=`rgba(0,238,255,${.03*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke()}
+    }
+  }
+
+  // lightning
+  bolts=bolts.filter(b=>{
+    b.life-=.025;b.alpha=b.life;
+    if(b.life<=0)return false;
+    ctx.save();ctx.globalAlpha=b.alpha*.7;ctx.strokeStyle=`rgba(${b.hue},1)`;ctx.lineWidth=.6;ctx.shadowBlur=8;ctx.shadowColor=`rgba(${b.hue},.8)`;
+    ctx.beginPath();ctx.moveTo(b.x,0);
+    b.segs.forEach(s=>ctx.lineTo(s.x,s.y));
+    ctx.stroke();
+    // glow pass
+    ctx.lineWidth=2;ctx.globalAlpha=b.alpha*.18;ctx.stroke();
+    ctx.restore();
+    return true;
+  });
+
+  requestAnimationFrame(drawFrame);
+}drawFrame();
+
+/* ══ TYPEWRITER ════════════════════════════════ */
+const phrases=['Disponible para nuevas oportunidades','Open to work · Chile & Remoto','Full Stack Engineer · 7+ años de exp.','Java · Spring Boot · Angular · IoT'];
+let pi=0,ci=0,del=false;
+const twEl=document.getElementById('tw-out');
+function twLoop(){
+  const p=phrases[pi];
+  if(!del){twEl.textContent=p.slice(0,ci+1);ci++;if(ci===p.length){del=true;setTimeout(twLoop,2400);return}}
+  else{twEl.textContent=p.slice(0,ci-1);ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length}}
+  setTimeout(twLoop,del?38:72);
+}twLoop();
+
+/* ══ COUNT UP ══════════════════════════════════ */
+function countUp(el,target,dur=1800){
+  let s=null;
+  (function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,4);
+    el.textContent=Math.round(e*target)+(target>=10?'+':'');if(p<1)requestAnimationFrame(step)})(0);
+  // trick to start on next frame
+  requestAnimationFrame(ts=>{s=ts;(function step(ts){const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,4);el.textContent=Math.round(e*target)+(target>=10?'+':'');if(p<1)requestAnimationFrame(step)})(ts)});
+}
+
+/* ══ INTERSECTION OBSERVER ═════════════════════ */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('vis');
+    if(e.target.classList.contains('stat')){
+      const el=e.target.querySelector('.stat-n');
+      const t=parseInt(el.dataset.target);
+      let started=false;
+      if(!started){started=true;
+        let s=null;requestAnimationFrame(function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/1800,1),ease=1-Math.pow(1-p,4);el.textContent=Math.round(ease*t)+(t>=10?'+':'');if(p<1)requestAnimationFrame(step)});
+      }
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fu,.stat').forEach(el=>io.observe(el));
+
+/* ══ ACTIVE NAV ════════════════════════════════ */
+const secs=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a');
+const nio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){navAs.forEach(a=>{a.classList.remove('active')});const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active')}
+  });
+},{threshold:.35});
+secs.forEach(s=>nio.observe(s));
+
+/* ══ RANDOM GLITCH SPIKE ══════════════════════ */
+setInterval(()=>{
+  const gs=document.querySelectorAll('.glitch');
+  const g=gs[Math.floor(Math.random()*gs.length)];
+  if(g){g.style.filter='hue-rotate(180deg) brightness(1.4)';setTimeout(()=>{g.style.filter=''},120)}
+},3500);
+
+/* ══ FLOAT NEBULA BLOBS ═══════════════════════ */
+let t2=0;
+(function floatBlobs(){
+  t2+=.003;
+  blobs[0].x=.2+Math.sin(t2*.7)*.06;blobs[0].y=.3+Math.cos(t2*.5)*.07;
+  blobs[1].x=.8+Math.cos(t2*.6)*.05;blobs[1].y=.7+Math.sin(t2*.8)*.06;
+  blobs[2].x=.5+Math.sin(t2*.4)*.04;blobs[2].y=.5+Math.cos(t2*.6)*.04;
+  requestAnimationFrame(floatBlobs);
+})();
+</script>
+</body>
+</html>
