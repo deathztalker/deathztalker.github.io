@@ -683,6 +683,90 @@ const blobs=[
 let mouseGlow={x:W/2,y:H/2};
 document.addEventListener('mousemove',e=>{mouseGlow.x=e.clientX;mouseGlow.y=e.clientY});
 
+// ══ BLACK HOLES — Gargantua Sináptica ═══════
+class BlackHole{
+  constructor(){
+    this.x=Math.random()*W*.6+W*.2;
+    this.y=Math.random()*H*.6+H*.2;
+    this.maxR=Math.random()*60+50;
+    this.r=0;
+    this.rot=0;
+    this.life=1;
+    this.phase=0; // 0=grow 1=stable 2=shrink
+    this.age=0;
+    this.stableTime=Math.random()*400+300;
+    this.hue=Math.random()<.5?'0,238,255':'255,32,144';
+    this.hue2=this.hue==='0,238,255'?'181,109,255':'0,238,255';
+    this.ringCount=Math.floor(Math.random()*3)+4;
+    this.drift={x:(Math.random()-.5)*.15,y:(Math.random()-.5)*.15};
+  }
+  update(){
+    this.age++;
+    this.rot+=.008;
+    this.x+=this.drift.x;
+    this.y+=this.drift.y;
+    if(this.phase===0){this.r+=(this.maxR-this.r)*.03;if(this.r>this.maxR*.95)this.phase=1;this.life=this.r/this.maxR;}
+    else if(this.phase===1){this.life=1;if(this.age>this.stableTime)this.phase=2;}
+    else{this.r*=.985;this.life=this.r/this.maxR;if(this.r<2)return false;}
+    return true;
+  }
+  draw(ctx){
+    const x=this.x,y=this.y,r=this.r;
+    ctx.save();
+    // event horizon — dark core
+    const core=ctx.createRadialGradient(x,y,0,x,y,r*.4);
+    core.addColorStop(0,'rgba(0,0,0,.9)');
+    core.addColorStop(.7,'rgba(0,0,0,.6)');
+    core.addColorStop(1,'transparent');
+    ctx.fillStyle=core;ctx.beginPath();ctx.arc(x,y,r*.4,0,Math.PI*2);ctx.fill();
+    // accretion disk — multiple rotating elliptical rings
+    for(let i=0;i<this.ringCount;i++){
+      const ringR=r*(.5+i*.15);
+      const a=this.life*(.12-.01*i);
+      const hue=i%2===0?this.hue:this.hue2;
+      ctx.save();
+      ctx.translate(x,y);
+      ctx.rotate(this.rot*(i%2===0?1:-1)+i*.4);
+      ctx.scale(1,.35+Math.sin(this.rot*2+i)*.08);
+      ctx.beginPath();ctx.arc(0,0,ringR,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(${hue},${a})`;ctx.lineWidth=1.5-i*.1;
+      ctx.shadowBlur=12;ctx.shadowColor=`rgba(${hue},${a*2})`;
+      ctx.stroke();ctx.restore();
+    }
+    // glow halo
+    const halo=ctx.createRadialGradient(x,y,r*.3,x,y,r*1.2);
+    halo.addColorStop(0,'transparent');
+    halo.addColorStop(.5,`rgba(${this.hue},${this.life*.04})`);
+    halo.addColorStop(.7,`rgba(${this.hue2},${this.life*.025})`);
+    halo.addColorStop(1,'transparent');
+    ctx.fillStyle=halo;ctx.beginPath();ctx.arc(x,y,r*1.2,0,Math.PI*2);ctx.fill();
+    // lensing ring — bright edge
+    ctx.beginPath();ctx.arc(x,y,r*.38,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(${this.hue},${this.life*.25})`;ctx.lineWidth=1;
+    ctx.shadowBlur=20;ctx.shadowColor=`rgba(${this.hue},${this.life*.5})`;
+    ctx.stroke();
+    ctx.restore();
+  }
+  pullParticle(p){
+    const dx=this.x-p.x,dy=this.y-p.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<this.r*3&&dist>5){
+      const force=this.life*.12*(this.r/dist);
+      p.vx+=dx/dist*force;
+      p.vy+=dy/dist*force;
+      // speed limit
+      const spd=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+      if(spd>3){p.vx*=3/spd;p.vy*=3/spd;}
+    }
+  }
+}
+let blackHoles=[];
+setInterval(()=>{
+  if(blackHoles.length<2&&Math.random()<.4)blackHoles.push(new BlackHole());
+},5000);
+// spawn first one after 2s
+setTimeout(()=>blackHoles.push(new BlackHole()),2000);
+
 function drawFrame(){
   ctx.clearRect(0,0,W,H);
 
@@ -698,8 +782,11 @@ function drawFrame(){
   mg2.addColorStop(0,'rgba(0,238,255,.04)');mg2.addColorStop(1,'transparent');
   ctx.fillStyle=mg2;ctx.beginPath();ctx.arc(mouseGlow.x,mouseGlow.y,180,0,Math.PI*2);ctx.fill();
 
-  // particles + connections
-  PARTS.forEach(p=>{p.step();p.draw()});
+  // particles + connections + black hole gravity
+  PARTS.forEach(p=>{
+    blackHoles.forEach(bh=>bh.pullParticle(p));
+    p.step();p.draw();
+  });
   for(let i=0;i<PARTS.length;i++){
     for(let j=i+1;j<PARTS.length;j++){
       const dx=PARTS[i].x-PARTS[j].x,dy=PARTS[i].y-PARTS[j].y;
@@ -723,6 +810,14 @@ function drawFrame(){
   });
 
   requestAnimationFrame(drawFrame);
+
+  // black holes
+  blackHoles=blackHoles.filter(bh=>{
+    if(!bh.update())return false;
+    bh.draw(ctx);
+    return true;
+  });
+
 }drawFrame();
 
 /* ══ TYPEWRITER ════════════════════════════════ */
