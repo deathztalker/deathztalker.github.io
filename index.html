@@ -210,8 +210,9 @@ section{position:relative;z-index:2;padding:100px 0}
 .pname{font-family:var(--disp);font-weight:700;font-size:21px;color:#fff;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;line-height:1.15}
 .pdesc{font-size:12.5px;color:var(--t1);line-height:1.7;font-weight:300;flex:1;margin-bottom:16px}
 .pdesc strong{color:var(--t0);font-weight:400}
-.ptags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px}
-.ptag{font-family:var(--mono);font-size:8.5px;padding:2px 7px;color:rgba(0,238,255,.55);border:1px solid rgba(0,238,255,.12);background:rgba(0,238,255,.04)}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.ptag{font-family:var(--mono);font-size:9px;padding:3px 9px;color:rgba(0,238,255,.75);border:1px solid rgba(0,238,255,.2);background:rgba(0,238,255,.06);letter-spacing:.04em;transition:all .2s;cursor:default}
+.ptag:hover{border-color:rgba(0,238,255,.5);background:rgba(0,238,255,.12);color:var(--c);box-shadow:0 0 10px rgba(0,238,255,.15)}
 .plinks{display:flex;gap:14px;border-top:1px solid var(--bdr);padding-top:14px}
 .plink{font-family:var(--mono);font-size:9.5px;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:color .2s,text-shadow .2s;text-decoration:none}
 .plink:hover{color:var(--c);text-shadow:0 0 10px var(--c)}
@@ -253,8 +254,15 @@ section{position:relative;z-index:2;padding:100px 0}
 .eproj:hover{border-left-color:var(--c);background:var(--bg3)}
 .epn{font-family:var(--mono);font-size:10px;color:var(--c);letter-spacing:.07em;margin-bottom:4px}
 .epd{font-size:12.5px;color:var(--t1);font-weight:300;line-height:1.65}
-.etags{display:flex;flex-wrap:wrap;gap:4px}
-.etag{font-family:var(--mono);font-size:8.5px;color:var(--t3);border:1px solid var(--t3);background:rgba(29,46,66,.3);padding:2px 7px}
+.etags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.etag{font-family:var(--mono);font-size:9px;color:var(--c);border:1px solid rgba(0,238,255,.28);background:rgba(0,238,255,.06);padding:3px 9px;letter-spacing:.04em;transition:all .25s;cursor:default;position:relative;overflow:hidden}
+.etag::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,238,255,.1),transparent 60%);opacity:0;transition:opacity .25s}
+.etag:hover{border-color:rgba(0,238,255,.65);background:rgba(0,238,255,.14);box-shadow:0 0 12px rgba(0,238,255,.2);color:#fff}
+.etag:hover::before{opacity:1}
+.etag:nth-child(3n+1){color:var(--mg);border-color:rgba(255,32,144,.28);background:rgba(255,32,144,.06)}
+.etag:nth-child(3n+1):hover{border-color:rgba(255,32,144,.6);background:rgba(255,32,144,.14);box-shadow:0 0 12px rgba(255,32,144,.2);color:#fff}
+.etag:nth-child(5n){color:var(--gold);border-color:rgba(245,197,24,.25);background:rgba(245,197,24,.05)}
+.etag:nth-child(5n):hover{border-color:rgba(245,197,24,.55);background:rgba(245,197,24,.12);box-shadow:0 0 12px rgba(245,197,24,.2);color:#fff}
 
 /* ══════════════════════════════════════════════
    CONTACT
@@ -643,15 +651,15 @@ class Particle{
     this.y=init?Math.random()*H:H+5;
     this.vx=(Math.random()-.5)*.35;
     this.vy=-(Math.random()*.55+.08);
-    this.r=Math.random()*1.6+.2;
-    this.alpha=Math.random()*.55+.1;
+    this.r=Math.random()*2+.3;
+    this.alpha=Math.random()*.65+.15;
     this.hue=Math.random()<.72?'0,238,255':'255,32,144';
     this.life=1;this.dec=Math.random()*.0025+.0008;
   }
   step(){this.x+=this.vx;this.y+=this.vy;this.life-=this.dec;if(this.life<=0||this.y<-5)this.reset(false)}
   draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(${this.hue},${this.alpha*this.life})`;ctx.fill()}
 }
-const PARTS=[];for(let i=0;i<140;i++)PARTS.push(new Particle());
+const PARTS=[];for(let i=0;i<220;i++)PARTS.push(new Particle());
 
 // lightning bolts occasional
 let bolts=[];
@@ -661,13 +669,14 @@ function spawnBolt(){
   while(cy<H*.7){const len=Math.random()*60+20;const angle=(Math.random()-.5)*1.2+Math.PI*.5;cx+=Math.cos(angle)*len;cy+=Math.sin(angle)*len;segs.push({x:cx,y:cy})}
   bolts.push({segs,x,alpha:1,life:1,hue:Math.random()<.7?'0,238,255':'255,32,144'});
 }
-setInterval(()=>{if(Math.random()<.35)spawnBolt()},2800);
+setInterval(()=>{if(Math.random()<.5)spawnBolt()},2200);
 
 // nebula blobs
 const blobs=[
-  {x:.2,y:.3,r:320,c:'0,238,255',a:.028},
-  {x:.8,y:.7,r:280,c:'255,32,144',a:.022},
-  {x:.5,y:.5,r:400,c:'181,109,255',a:.015},
+  {x:.2,y:.3,r:420,c:'0,238,255',a:.035},
+  {x:.8,y:.7,r:360,c:'255,32,144',a:.028},
+  {x:.5,y:.5,r:500,c:'181,109,255',a:.02},
+  {x:.15,y:.8,r:280,c:'0,255,159',a:.015},
 ];
 
 // mouse-reactive glow
@@ -695,7 +704,7 @@ function drawFrame(){
     for(let j=i+1;j<PARTS.length;j++){
       const dx=PARTS[i].x-PARTS[j].x,dy=PARTS[i].y-PARTS[j].y;
       const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<90){ctx.beginPath();ctx.moveTo(PARTS[i].x,PARTS[i].y);ctx.lineTo(PARTS[j].x,PARTS[j].y);ctx.strokeStyle=`rgba(0,238,255,${.03*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke()}
+      if(d<110){ctx.beginPath();ctx.moveTo(PARTS[i].x,PARTS[i].y);ctx.lineTo(PARTS[j].x,PARTS[j].y);ctx.strokeStyle=`rgba(0,238,255,${.06*(1-d/110)})`;ctx.lineWidth=.6;ctx.stroke()}
     }
   }
 
@@ -779,7 +788,7 @@ window.addEventListener('scroll',()=>{
 bttBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
 /* ══ MOBILE PARTICLE REDUCTION ═══════════════ */
-if(window.innerWidth<768){while(PARTS.length>40)PARTS.pop()}
+if(window.innerWidth<768){while(PARTS.length>60)PARTS.pop()}
 
 /* ══ RANDOM GLITCH SPIKE ══════════════════════ */
 setInterval(()=>{
