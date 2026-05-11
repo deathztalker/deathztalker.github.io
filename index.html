@@ -354,13 +354,16 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 <nav>
   <div class="nav-logo"><span style="color:var(--t2)">//</span> john_ortiz<span style="color:var(--t3)">.dev</span></div>
   <ul class="nav-links" id="nav-links">
-    <li><a href="#about">Sobre mí</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#projects">Proyectos</a></li>
-    <li><a href="#experience">Experiencia</a></li>
-    <li><a href="#contact">Contacto</a></li>
+    <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
+    <li><a href="#stack" data-i18n="nav_stack">Stack</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
+    <li><a href="#experience" data-i18n="nav_exp">Experiencia</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
   </ul>
-  <a href="john_ortiz_cv_v2.html" class="nav-cv" target="_blank"><span>↗ Ver CV</span></a>
+  <div style="display:flex;align-items:center;gap:15px;margin-left:30px">
+    <button id="lang-toggle" style="background:none;border:1px solid var(--bdr);color:var(--t1);font-family:var(--mono);font-size:10px;padding:4px 8px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;">EN</button>
+    <a href="john_ortiz_cv_v2.html" class="nav-cv" target="_blank"><span data-i18n="nav_cv">↗ Ver CV</span></a>
+  </div>
   <button class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 
@@ -371,7 +374,7 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
   <div class="wrap">
     <div class="hero-inner">
       <div>
-        <div class="hero-pre">// Software Engineer · Talca, Chile · Disponible</div>
+        <div class="hero-pre" data-i18n="hero_pre">// Software Engineer · Talca, Chile · Disponible</div>
         <h1 class="hero-name">
           <span class="glitch" data-text="John">John</span>
           <em class="glitch" data-text="Ortiz">Ortiz</em>
@@ -379,10 +382,10 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
         <div class="hero-role">
           Java · Spring Boot<span class="rsp">◆</span>Angular · React<span class="rsp">◆</span>Microservicios<span class="rsp">◆</span>IoT
         </div>
-        <p class="hero-bio">Ingeniero en Computación e Informática especializado en el diseño e implementación de arquitecturas escalables. Con <strong>más de 7 años de experiencia</strong>, construyo sistemas de alto rendimiento para los sectores público y privado. Apasionado por la integración de ecosistemas complejos donde convergen el <strong>software enterprise y el hardware</strong>.</p>
+        <p class="hero-bio" data-i18n="hero_bio">Ingeniero en Computación e Informática especializado en el diseño e implementación de arquitecturas escalables. Con <strong>más de 7 años de experiencia</strong>, construyo sistemas de alto rendimiento para los sectores público y privado. Apasionado por la integración de ecosistemas complejos donde convergen el <strong>software enterprise y el hardware</strong>.</p>
         <div class="hero-btns">
-          <a href="#projects" class="btn-p">Ver proyectos</a>
-          <a href="#contact" class="btn-g"><span>Contactar</span></a>
+          <a href="#projects" class="btn-p" data-i18n="hero_btn_proj">Ver proyectos</a>
+          <a href="#contact" class="btn-g"><span data-i18n="hero_btn_contact">Contactar</span></a>
         </div>
         <div class="hero-status">
           <div class="sdot"></div>
@@ -390,15 +393,15 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
         </div>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-n" data-target="7" data-suffix="+">0</div><div class="stat-l">Años exp.</div></div>
-        <div class="stat"><div class="stat-n" data-target="15" data-suffix="+">0</div><div class="stat-l">Proyectos</div></div>
-        <div class="stat"><div class="stat-n" data-target="30" data-suffix="+">0</div><div class="stat-l">Tecnologías</div></div>
-        <div class="stat"><div class="stat-n" data-target="5">0</div><div class="stat-l">Empresas</div></div>
+        <div class="stat"><div class="stat-n" data-target="7" data-suffix="+">0</div><div class="stat-l" data-i18n="stat_years">Años exp.</div></div>
+        <div class="stat"><div class="stat-n" data-target="15" data-suffix="+">0</div><div class="stat-l" data-i18n="stat_proj">Proyectos</div></div>
+        <div class="stat"><div class="stat-n" data-target="30" data-suffix="+">0</div><div class="stat-l" data-i18n="stat_tech">Tecnologías</div></div>
+        <div class="stat"><div class="stat-n" data-target="5">0</div><div class="stat-l" data-i18n="stat_comp">Empresas</div></div>
       </div>
     </div>
   </div>
   <div class="scroll-hint">
-    <div class="sh-txt">scroll</div>
+    <div class="sh-txt" data-i18n="scroll_hint">scroll</div>
     <div class="sh-line"></div>
   </div>
 </section>
@@ -409,28 +412,28 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
     <div class="slabel"><span class="slabel-txt">Sobre mí</span><div class="slabel-line"></div><span class="slabel-num">01</span></div>
     <div class="about-grid">
       <div class="fu">
-        <h2 class="about-h">Ingeniería de Software<br>con raíces en <span>Hardware</span></h2>
-        <p class="about-p">Comencé mi carrera diseñando circuitos impresos y programando firmware para microcontroladores. Esta base técnica me otorgó una perspectiva integral: comprendo el ciclo de vida de un sistema desde la capa física hasta la infraestructura en la nube.</p>
-        <p class="about-p">Actualmente me enfoco en el desarrollo backend con <strong>Java y Spring Boot</strong>, y en la creación de interfaces dinámicas con <strong>Angular y React</strong>. Mi objetivo es orquestar soluciones resilientes para plataformas <em>enterprise</em>.</p>
-        <p class="about-p">Me motiva resolver problemas estructurales mediante código sostenible — arquitecturas limpias, APIs seguras y de alta disponibilidad, y flujos de usuario optimizados.</p>
+        <h2 class="about-h" data-i18n="about_title_1">Ingeniería de Software<br>con raíces en <span>Hardware</span></h2>
+        <p class="about-p" data-i18n="about_p1">Comencé mi carrera diseñando circuitos impresos y programando firmware para microcontroladores. Esta base técnica me otorgó una perspectiva integral: comprendo el ciclo de vida de un sistema desde la capa física hasta la infraestructura en la nube.</p>
+        <p class="about-p" data-i18n="about_p2">Actualmente me enfoco en el desarrollo backend con <strong>Java y Spring Boot</strong>, y en la creación de interfaces dinámicas con <strong>Angular y React</strong>. Mi objetivo es orquestar soluciones resilientes para plataformas <em>enterprise</em>.</p>
+        <p class="about-p" data-i18n="about_p3">Me motiva resolver problemas estructurales mediante código sostenible — arquitecturas limpias, APIs seguras y de alta disponibilidad, y flujos de usuario optimizados.</p>
         <div class="hlist">
-          <div class="hitem">Diseño de microservicios y APIs (REST, SOAP, HL7/FHIR) para ecosistemas críticos.</div>
-          <div class="hitem">Desarrollo Full Stack moderno: Spring Boot + Angular/Vue, Node.js + React.</div>
-          <div class="hitem">Visión transversal: Integración nativa entre soluciones de software y dispositivos IoT.</div>
-          <div class="hitem">I+D continuo: Game Development (JS), Web3 y despliegues serverless.</div>
+          <div class="hitem" data-i18n="about_h1">Diseño de microservicios y APIs (REST, SOAP, HL7/FHIR) para ecosistemas críticos.</div>
+          <div class="hitem" data-i18n="about_h2">Desarrollo Full Stack moderno: Spring Boot + Angular/Vue, Node.js + React.</div>
+          <div class="hitem" data-i18n="about_h3">Visión transversal: Integración nativa entre soluciones de software y dispositivos IoT.</div>
+          <div class="hitem" data-i18n="about_h4">I+D continuo: Game Development (JS), Web3 y despliegues serverless.</div>
         </div>
       </div>
       <div class="fu d2">
         <div class="facts">
-          <div class="fact"><div class="fact-bar"></div><span class="fk">Ubicación</span><span class="fv">Talca, Chile 🇨🇱</span></div>
-          <div class="fact"><div class="fact-bar"></div><span class="fk">Experiencia</span><span class="fv">7+ años profesionales</span></div>
-          <div class="fact"><div class="fact-bar"></div><span class="fk">Especialidad</span><span class="fv">Java · Spring Boot · Angular</span></div>
-          <div class="fact"><div class="fact-bar"></div><span class="fk">También</span><span class="fv">Node.js · React · Vue.js</span></div>
-          <div class="fact"><div class="fact-bar"></div><span class="fk">Idiomas</span><span class="fv">Español nativo · Inglés B1</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Ubicación</span><span class="fv" data-i18n="fact_loc">Talca, Chile 🇨🇱</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Experiencia</span><span class="fv" data-i18n="fact_exp">7+ años profesionales</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Especialidad</span><span class="fv" data-i18n="fact_spec">Java · Spring Boot · Angular</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">También</span><span class="fv" data-i18n="fact_also">Node.js · React · Vue.js</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Idiomas</span><span class="fv" data-i18n="fact_lang">Español nativo · Inglés B1</span></div>
           <div class="fact"><div class="fact-bar"></div><span class="fk">GitHub</span><span class="fv"><a href="https://github.com/deathztalker" target="_blank">@deathztalker</a></span></div>
           <div class="fact"><div class="fact-bar"></div><span class="fk">LinkedIn</span><span class="fv"><a href="https://linkedin.com/in/john-ortiz" target="_blank">john-ortiz</a></span></div>
           <div class="fact"><div class="fact-bar"></div><span class="fk">Email</span><span class="fv"><a href="mailto:johnpro38@gmail.com">johnpro38@gmail.com</a></span></div>
-          <div class="fact"><div class="fact-bar"></div><span class="fk">Status</span><span class="fv" style="color:var(--green)">Open to work ✓</span></div>
+          <div class="fact"><div class="fact-bar"></div><span class="fk">Status</span><span class="fv" style="color:var(--green)" data-i18n="fact_status">Open to work ✓</span></div>
         </div>
       </div>
     </div>
@@ -440,12 +443,12 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 <!-- ════ STACK ══════════════════════════════════ -->
 <section id="stack">
   <div class="wrap">
-    <div class="slabel"><span class="slabel-txt">Stack Tecnológico</span><div class="slabel-line"></div><span class="slabel-num">02</span></div>
+    <div class="slabel"><span class="slabel-txt" data-i18n="stack_title">Stack Tecnológico</span><div class="slabel-line"></div><span class="slabel-num">02</span></div>
     <div class="stack-wrap fu">
-      <div class="scell"><div class="sc-icon">&lt;/&gt; Lenguajes</div><div class="sc-title">Languages</div><div class="tags"><span class="tag hot">Java</span><span class="tag hot">JavaScript</span><span class="tag hot">TypeScript</span><span class="tag">C#</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">C/C++</span><span class="tag">VB.NET</span></div></div>
+      <div class="scell"><div class="sc-icon">&lt;/&gt; <span data-i18n="stack_l1">Lenguajes</span></div><div class="sc-title">Languages</div><div class="tags"><span class="tag hot">Java</span><span class="tag hot">JavaScript</span><span class="tag hot">TypeScript</span><span class="tag">C#</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">C/C++</span><span class="tag">VB.NET</span></div></div>
       <div class="scell"><div class="sc-icon">⚙ Backend</div><div class="sc-title">Backend & APIs</div><div class="tags"><span class="tag hot">Spring Boot</span><span class="tag hot">Node.js</span><span class="tag">Express.js</span><span class="tag">Spring Security</span><span class="tag">JPA/Hibernate</span><span class="tag">CodeIgniter</span><span class="tag">Liferay</span><span class="tag">REST</span><span class="tag">SOAP</span><span class="tag">HL7/FHIR</span></div></div>
       <div class="scell"><div class="sc-icon">◨ Frontend</div><div class="sc-title">Frontend & Mobile</div><div class="tags"><span class="tag hot">Angular</span><span class="tag">React</span><span class="tag">Vue.js</span><span class="tag">React Native</span><span class="tag">RxJS</span><span class="tag">Vite</span><span class="tag">ExtJS</span><span class="tag">HTML5/CSS3</span></div></div>
-      <div class="scell"><div class="sc-icon">◈ Datos</div><div class="sc-title">Bases de Datos</div><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">SQL Server</span><span class="tag">Oracle</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">PL-SQL</span></div></div>
+      <div class="scell"><div class="sc-icon">◈ Datos</div><div class="sc-title" data-i18n="stack_l2">Bases de Datos</div><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">SQL Server</span><span class="tag">Oracle</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">PL-SQL</span></div></div>
       <div class="scell"><div class="sc-icon">☁ Cloud</div><div class="sc-title">DevOps & Cloud</div><div class="tags"><span class="tag warm">Docker</span><span class="tag warm">Kubernetes</span><span class="tag warm">Jenkins</span><span class="tag warm">CI/CD</span><span class="tag">Git/GitHub</span><span class="tag">GCP</span><span class="tag">AWS</span><span class="tag">Linux</span><span class="tag">Scrum</span></div></div>
       <div class="scell"><div class="sc-icon">⌁ Hardware</div><div class="sc-title">Hardware & IoT</div><div class="tags"><span class="tag">Arduino</span><span class="tag">PCB Design</span><span class="tag">GPS/GPRS</span><span class="tag">Blender</span><span class="tag">123D Design</span><span class="tag">3D Print</span></div></div>
     </div>
@@ -455,19 +458,19 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 <!-- ════ PROJECTS ════════════════════════════════ -->
 <section id="projects">
   <div class="wrap">
-    <div class="slabel"><span class="slabel-txt">Proyectos</span><div class="slabel-line"></div><span class="slabel-num">03</span></div>
+    <div class="slabel"><span class="slabel-txt" data-i18n="proj_title">Proyectos</span><div class="slabel-line"></div><span class="slabel-num">03</span></div>
     <div class="pgrid">
 
       <!-- FEATURED DarkRealm -->
       <article class="pcard feat c-m fu">
         <div class="pi">
           <div class="pbody">
-            <div class="ptype">// Proyecto Personal · Arquitectura JS</div>
+            <div class="ptype" data-i18n="proj_1_type">// Proyecto Personal · Arquitectura JS</div>
             <div class="pname">DarkRealm RPG Engine</div>
-            <p class="pdesc">Motor de videojuego RPG desarrollado desde cero con <strong>JavaScript Vanilla y HTML5 Canvas</strong>. Implementación rigurosa de principios SOLID y patrones de diseño (State, Observer, Factory) para manejar físicas, renderizado a 60fps, y gestión de estado asíncrono.</p>
+            <p class="pdesc" data-i18n="proj_1_desc">Motor de videojuego RPG desarrollado desde cero con <strong>JavaScript Vanilla y HTML5 Canvas</strong>. Implementación rigurosa de principios SOLID y patrones de diseño (State, Observer, Factory) para manejar físicas, renderizado a 60fps, y gestión de estado asíncrono.</p>
             <div class="ptags"><span class="ptag">JavaScript</span><span class="ptag">HTML5 Canvas</span><span class="ptag">CSS3</span><span class="ptag">OOP</span><span class="ptag">Game Loop</span><span class="ptag">GitHub Pages</span></div>
             <div class="plinks">
-              <a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Ver en GitHub</a>
+              <a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span data-i18n="proj_1_link">Ver en GitHub</span></a>
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
@@ -499,9 +502,9 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 
       <article class="pcard c-c fu d1">
         <div class="pi">
-          <div class="ptype">// Desarrollo Móvil</div>
-          <div class="pname">Ecosistema Mobile<br>React Native</div>
-          <p class="pdesc">Construcción de aplicaciones cross-platform robustas. Gestión de estado global, consumo de APIs REST/GraphQL y bridge con módulos nativos (Swift/Kotlin) optimizando la experiencia de usuario.</p>
+          <div class="ptype" data-i18n="proj_2_type">// Desarrollo Móvil</div>
+          <div class="pname" data-i18n="proj_2_name">Ecosistema Mobile<br>React Native</div>
+          <p class="pdesc" data-i18n="proj_2_desc">Construcción de aplicaciones cross-platform robustas. Gestión de estado global, consumo de APIs REST/GraphQL y bridge con módulos nativos (Swift/Kotlin) optimizando la experiencia de usuario.</p>
           <div class="ptags"><span class="ptag">React Native</span><span class="ptag">JavaScript</span><span class="ptag">REST API</span><span class="ptag">Expo</span></div>
           <div class="plinks"><a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></div>
         </div>
@@ -509,9 +512,9 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 
       <div class="pcard c-gold fu d2">
         <div class="pi">
-          <div class="ptype">// Personal · Hardware / IoT</div>
-          <div class="pname">IoT Maker<br>& Arduino</div>
-          <p class="pdesc">Diseño de <strong>PCBs</strong>, firmware C/C++ para Arduino, carcasas en 3D y kits de <strong>geolocalización GPS/GPRS</strong> para tracking vehicular.</p>
+          <div class="ptype" data-i18n="proj_3_type">// Personal · Hardware / IoT</div>
+          <div class="pname" data-i18n="proj_3_name">IoT Maker<br>& Arduino</div>
+          <p class="pdesc" data-i18n="proj_3_desc">Diseño de <strong>PCBs</strong>, firmware C/C++ para Arduino, carcasas en 3D y kits de <strong>geolocalización GPS/GPRS</strong> para tracking vehicular.</p>
           <div class="ptags"><span class="ptag">Arduino</span><span class="ptag">C/C++</span><span class="ptag">PCB Design</span><span class="ptag">GPS/GPRS</span><span class="ptag">Blender</span></div>
           <div class="plinks"><a href="https://github.com/deathztalker" target="_blank" class="plink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></div>
         </div>
@@ -519,21 +522,21 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 
       <article class="pcard c-g fu">
         <div class="pi">
-          <div class="ptype">// Desarrollo Corporativo · B2G</div>
-          <div class="pname">Plataformas Gubernamentales</div>
-          <p class="pdesc">Desarrollo de módulos core para <strong>Contraloría, Superintendencias y SII</strong>. Implementación de lógicas complejas para auditoría, trazabilidad e interoperabilidad de grandes volúmenes de datos transaccionales.</p>
+          <div class="ptype" data-i18n="proj_4_type">// Desarrollo Corporativo · B2G</div>
+          <div class="pname" data-i18n="proj_4_name">Plataformas Gubernamentales</div>
+          <p class="pdesc" data-i18n="proj_4_desc">Desarrollo de módulos core para <strong>Contraloría, Superintendencias y SII</strong>. Implementación de lógicas complejas para auditoría, trazabilidad e interoperabilidad de grandes volúmenes de datos transaccionales.</p>
           <div class="ptags"><span class="ptag">Liferay</span><span class="ptag">Spring Boot</span><span class="ptag">Vue.js</span><span class="ptag">VB.NET</span><span class="ptag">SOAP/REST</span></div>
-          <div class="plinks"><span class="plink" style="opacity:.38;cursor:default">NDA — Infraestructura Privada</span></div>
+          <div class="plinks"><span class="plink" style="opacity:.38;cursor:default" data-i18n="proj_4_link">NDA — Infraestructura Privada</span></div>
         </div>
       </article>
 
       <div class="pcard c-p fu d1">
         <div class="pi">
-          <div class="ptype">// Trabajo · SaaS Interno</div>
-          <div class="pname">Fleet Manager<br>& Geo Tracking</div>
-          <p class="pdesc">Sistema de arriendo de vehículos con contratos y facturación. Módulo de <strong>geolocalización en tiempo real</strong> con Leaflet y Google Maps.</p>
+          <div class="ptype" data-i18n="proj_5_type">// Trabajo · SaaS Interno</div>
+          <div class="pname" data-i18n="proj_5_name">Fleet Manager<br>& Geo Tracking</div>
+          <p class="pdesc" data-i18n="proj_5_desc">Sistema de arriendo de vehículos con contratos y facturación. Módulo de <strong>geolocalización en tiempo real</strong> con Leaflet y Google Maps.</p>
           <div class="ptags"><span class="ptag">PHP</span><span class="ptag">CodeIgniter</span><span class="ptag">SQL Server</span><span class="ptag">Leaflet</span><span class="ptag">GPS API</span></div>
-          <div class="plinks"><span class="plink" style="opacity:.38;cursor:default">NDA — código privado</span></div>
+          <div class="plinks"><span class="plink" style="opacity:.38;cursor:default" data-i18n="proj_4_link">NDA — Infraestructura Privada</span></div>
         </div>
       </div>
 
@@ -544,52 +547,52 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 <!-- ════ EXPERIENCE ══════════════════════════════ -->
 <section id="experience">
   <div class="wrap">
-    <div class="slabel"><span class="slabel-txt">Experiencia</span><div class="slabel-line"></div><span class="slabel-num">04</span></div>
+    <div class="slabel"><span class="slabel-txt" data-i18n="exp_title">Experiencia</span><div class="slabel-line"></div><span class="slabel-num">04</span></div>
     <div class="etl">
 
       <article class="eentry fu">
         <div class="emeta"><div class="eco">NTT DATA Chile S.A.</div><div class="edate">DIC 2023 → PRESENTE</div></div>
-        <div class="erole">// Software Engineer</div>
+        <div class="erole" data-i18n="exp_1_role">// Software Engineer</div>
         <div class="eprojs">
-          <div class="eproj"><div class="epn">Arquitectura Microservicios — LATAM Airlines</div><div class="epd">Ingeniería backend y frontend para la gestión operativa de flotas aéreas y pasajeros. Ecosistema basado en Spring Boot y Angular (RxJS) orquestado sobre GCP y contenedores Docker.</div></div>
-          <div class="eproj"><div class="epn">Interoperabilidad en Salud — EHCOS</div><div class="epd">Desarrollo de APIs RESTful de alta concurrencia para la sincronización de historiales clínicos. Implementación del protocolo HL7/FHIR, asegurando el cumplimiento de estrictos estándares de seguridad y protección de datos mediante Spring Security.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_1_proj1_name">Arquitectura Microservicios — LATAM Airlines</div><div class="epd" data-i18n="exp_1_proj1_desc">Ingeniería backend y frontend para la gestión operativa de flotas aéreas y pasajeros. Ecosistema basado en Spring Boot y Angular (RxJS) orquestado sobre GCP y contenedores Docker.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_1_proj2_name">Interoperabilidad en Salud — EHCOS</div><div class="epd" data-i18n="exp_1_proj2_desc">Desarrollo de APIs RESTful de alta concurrencia para la sincronización de historiales clínicos. Implementación del protocolo HL7/FHIR, asegurando el cumplimiento de estrictos estándares de seguridad y protección de datos mediante Spring Security.</div></div>
         </div>
         <div class="etags"><span class="etag">Spring Boot</span><span class="etag">Angular</span><span class="etag">GCP</span><span class="etag">Docker</span><span class="etag">Jenkins</span><span class="etag">HL7/FHIR</span><span class="etag">RxJS</span><span class="etag">Microservicios</span><span class="etag">Scrum</span></div>
       </article>
 
       <article class="eentry fu">
         <div class="emeta"><div class="eco">ValpoSystems Ltda.</div><div class="edate">OCT 2022 → DIC 2023</div></div>
-        <div class="erole">// Full Stack Software Engineer</div>
+        <div class="erole" data-i18n="exp_2_role">// Full Stack Software Engineer</div>
         <div class="eprojs">
-          <div class="eproj"><div class="epn">Plataformas Regulatorias del Estado</div><div class="epd">Desarrollo integral de sistemas de fiscalización y auditoría para la Contraloría General de la República y Superintendencia de Educación. Mantenimiento de procesos críticos sobre servidores Solaris y desarrollo de interfaces con Liferay y Vue.js.</div></div>
-          <div class="eproj"><div class="epn">Integración B2B — Kaufmann / SII</div><div class="epd">Automatización de validaciones tributarias mediante el consumo e integración de servicios SOAP/REST del Servicio de Impuestos Internos.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_2_proj1_name">Plataformas Regulatorias del Estado</div><div class="epd" data-i18n="exp_2_proj1_desc">Desarrollo integral de sistemas de fiscalización y auditoría para la Contraloría General de la República y Superintendencia de Educación. Mantenimiento de procesos críticos sobre servidores Solaris y desarrollo de interfaces con Liferay y Vue.js.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_2_proj2_name">Integración B2B — Kaufmann / SII</div><div class="epd" data-i18n="exp_2_proj2_desc">Automatización de validaciones tributarias mediante el consumo e integración de servicios SOAP/REST del Servicio de Impuestos Internos.</div></div>
         </div>
         <div class="etags"><span class="etag">Liferay</span><span class="etag">Vue.js</span><span class="etag">Spring Boot</span><span class="etag">VB.NET</span><span class="etag">Java</span><span class="etag">PostgreSQL</span><span class="etag">REST/SOAP</span></div>
       </article>
 
       <article class="eentry fu">
         <div class="emeta"><div class="eco">Firma Abogados Chile SpA</div><div class="edate">OCT 2021 → OCT 2022</div></div>
-        <div class="erole">// Desarrollador Full Stack</div>
+        <div class="erole" data-i18n="exp_3_role">// Desarrollador Full Stack</div>
         <div class="eprojs">
-          <div class="eproj"><div class="epn">Sistema Arriendo + Geolocalización de Flota</div><div class="epd">PHP/CodeIgniter para contratos y facturación. Tracking vehicular en tiempo real con Leaflet, ExtJS y Google Maps.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_3_proj1_name">Sistema Arriendo + Geolocalización de Flota</div><div class="epd" data-i18n="exp_3_proj1_desc">PHP/CodeIgniter para contratos y facturación. Tracking vehicular en tiempo real con Leaflet, ExtJS y Google Maps.</div></div>
         </div>
         <div class="etags"><span class="etag">PHP</span><span class="etag">CodeIgniter</span><span class="etag">SQL Server</span><span class="etag">ExtJS</span><span class="etag">Leaflet</span><span class="etag">GPS API</span></div>
       </article>
 
       <article class="eentry fu">
         <div class="emeta"><div class="eco">CEHO Servicios</div><div class="edate">NOV 2018 → OCT 2021</div></div>
-        <div class="erole">// Técnico en Terreno TI / Electrónica</div>
+        <div class="erole" data-i18n="exp_4_role">// Técnico en Terreno TI / Electrónica</div>
         <div class="eprojs">
-          <div class="eproj"><div class="epn">TotalPack Ltda. — Soporte Nacional</div><div class="epd">Instalación y mantención de turnomáticos, autoservicios y relojes control. Soporte en terreno nacional, redes y conectividad.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_4_proj1_name">TotalPack Ltda. — Soporte Nacional</div><div class="epd" data-i18n="exp_4_proj1_desc">Instalación y mantención de turnomáticos, autoservicios y relojes control. Soporte en terreno nacional, redes y conectividad.</div></div>
         </div>
         <div class="etags"><span class="etag">Electrónica</span><span class="etag">BD Embebidas</span><span class="etag">Redes</span><span class="etag">Hardware</span></div>
       </article>
 
       <article class="eentry fu">
         <div class="emeta"><div class="eco">Mobiquos Ltda.</div><div class="edate">JUN 2018 → OCT 2018</div></div>
-        <div class="erole">// Técnico Electro-Informático</div>
+        <div class="erole" data-i18n="exp_5_role">// Técnico Electro-Informático</div>
         <div class="eprojs">
-          <div class="eproj"><div class="epn">Kits IoT & PCB Design</div><div class="epd">Diseño de PCBs, firmware C/C++ para Arduino, modelado 3D, kits GPS/GPRS para tracking vehicular.</div></div>
+          <div class="eproj"><div class="epn" data-i18n="exp_5_proj1_name">Kits IoT & PCB Design</div><div class="epd" data-i18n="exp_5_proj1_desc">Diseño de PCBs, firmware C/C++ para Arduino, modelado 3D, kits GPS/GPRS para tracking vehicular.</div></div>
         </div>
         <div class="etags"><span class="etag">Arduino</span><span class="etag">C/C++</span><span class="etag">PCB Design</span><span class="etag">GPS/GPRS</span><span class="etag">Blender</span></div>
       </article>
@@ -602,16 +605,16 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 <section id="contact">
   <div class="contact-glow"></div>
   <div class="wrap">
-    <div class="slabel"><span class="slabel-txt">Contacto</span><div class="slabel-line"></div><span class="slabel-num">05</span></div>
-    <h2 class="ch fu">¿Hablamos de tu <span>proyecto</span>?</h2>
-    <p class="csub fu d1">Abierto a oportunidades laborales, proyectos freelance y colaboraciones. Respondo en menos de 24 horas.</p>
+    <div class="slabel"><span class="slabel-txt" data-i18n="nav_contact">Contacto</span><div class="slabel-line"></div><span class="slabel-num">05</span></div>
+    <h2 class="ch fu" data-i18n="contact_title">¿Hablamos de tu <span>proyecto</span>?</h2>
+    <p class="csub fu d1" data-i18n="contact_sub">Abierto a oportunidades laborales, proyectos freelance y colaboraciones. Respondo en menos de 24 horas.</p>
     <div class="clinks fu d2">
-      <a href="mailto:johnpro38@gmail.com" class="clink"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>johnpro38@gmail.com</span></a>
-      <a href="https://github.com/deathztalker" target="_blank" class="clink"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>github/deathztalker</span></a>
-      <a href="https://linkedin.com/in/john-ortiz" target="_blank" class="clink"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span>LinkedIn</span></a>
-      <a href="tel:+56981561929" class="clink"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+569 8156 1929</span></a>
+      <a href="mailto:johnpro38@gmail.com" class="clink" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>johnpro38@gmail.com</span></a>
+      <a href="https://github.com/deathztalker" target="_blank" class="clink" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>github/deathztalker</span></a>
+      <a href="https://linkedin.com/in/john-ortiz" target="_blank" class="clink" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span>LinkedIn</span></a>
+      <a href="tel:+56981561929" class="clink" aria-label="Phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+569 8156 1929</span></a>
     </div>
-    <div class="avbox fu d3"><div class="avdot"></div>Disponible para nuevas oportunidades — Talca, Chile · Remoto OK</div>
+    <div class="avbox fu d3"><div class="avdot"></div><span data-i18n="contact_av">Disponible para nuevas oportunidades — Talca, Chile · Remoto OK</span></div>
   </div>
 </section>
 
@@ -620,12 +623,44 @@ footer{background:var(--bg0);border-top:1px solid var(--bdr);padding:22px 36px;d
 
 <footer>
   <div class="fc"><span>//</span> john_ortiz · 2026</div>
-  <div class="fc">Software Engineer · <span>Full Stack</span> · Talca CL</div>
-  <div class="fc">built with <span>HTML · CSS · JS</span></div>
+  <div class="fc" data-i18n="footer_1">Software Engineer · <span>Full Stack</span> · Talca CL</div>
+  <div class="fc" data-i18n="footer_2">built with <span>HTML · CSS · JS</span></div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
-/* ══ CURSOR ═══════════════════════════════════ */
+/* ══ TRANSLATION LOGIC ═════════════════════════ */
+let currLang = localStorage.getItem('lang') || (navigator.language.startsWith('es') ? 'es' : 'en');
+const langToggle = document.getElementById('lang-toggle');
+
+function setLanguage(lang) {
+  currLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  langToggle.textContent = lang === 'es' ? 'EN' : 'ES';
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(i18n[lang] && i18n[lang][key]) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+  
+  // Update CV link href based on language
+  const cvLink = document.querySelector('.nav-cv');
+  if (cvLink) {
+    cvLink.href = lang === 'en' ? 'john_ortiz_cv_en.html' : 'john_ortiz_cv_v2.html';
+  }
+}
+
+langToggle.addEventListener('click', () => {
+  setLanguage(currLang === 'es' ? 'en' : 'es');
+});
+
+// Init language
+setLanguage(currLang);
+
+/* ══ CANVAS SETUP ══════════════════════════════ */
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Ortiz — CV · Software Engineer</title>
+<meta name="description" content="CV profesional de John Ortiz, Software Engineer Full Stack con 7+ años en Java, Spring Boot, Angular y Microservicios.">
+<meta name="author" content="John Ortiz">
+<meta property="og:title" content="John Ortiz — CV">
+<meta property="og:description" content="Software Engineer Full Stack · Java · Spring Boot · Angular · 7+ años exp.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://deathztalker.github.io/john_ortiz_cv_v2.html">
+<meta property="og:image" content="https://deathztalker.github.io/avatar.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --c:#00f5ff;
+  --cm:rgba(0,245,255,.12);
+  --cb:rgba(0,245,255,.55);
+  --mg:#ff2d9b;
+  --mgm:rgba(255,45,155,.1);
+  --gold:#ffd166;
+  --bg0:#03050f;
+  --bg1:#060b18;
+  --bg2:#0b1222;
+  --bg3:#101828;
+  --t0:#f0f4ff;
+  --t1:#8899bb;
+  --t2:#3a4d6a;
+  --t3:#1a2a3d;
+}
+
+html{background:var(--bg0)}
+
+body{
+  font-family:'Exo 2',sans-serif;
+  font-size:10.2px;
+  line-height:1.55;
+  color:var(--t0);
+  width:210mm;
+  min-height:297mm;
+  margin:0 auto;
+  background:var(--bg0);
+  position:relative;
+}
+
+/* scanlines */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,245,255,.008) 3px,rgba(0,245,255,.008) 4px);
+  pointer-events:none;z-index:9999;
+}
+
+/* ── LAYOUT ─────────────────────────────────── */
+.wrap{
+  display:grid;
+  grid-template-columns:190px 1fr;
+  grid-template-rows:auto 1fr auto;
+  min-height:297mm;
+}
+
+/* ── HEADER ─────────────────────────────────── */
+.hd{
+  grid-column:1/-1;
+  background:var(--bg2);
+  border-bottom:1px solid var(--cb);
+  display:flex;align-items:stretch;
+  position:relative;overflow:hidden;
+}
+
+/* left accent bar gradient */
+.hd::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--c) 0%,var(--mg) 100%);
+  box-shadow:0 0 16px var(--c);
+}
+
+/* corner glow */
+.hd::after{
+  content:'';position:absolute;right:-40px;top:-40px;
+  width:220px;height:180px;
+  background:radial-gradient(ellipse,rgba(0,245,255,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.hd-id{
+  flex:1;padding:18px 20px 18px 24px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+
+.hd-bracket{
+  font-family:'Share Tech Mono',monospace;
+  color:var(--c);font-size:9px;letter-spacing:.3em;
+  opacity:.5;margin-bottom:6px;
+}
+
+.hd-name{
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;font-size:30px;
+  letter-spacing:.07em;text-transform:uppercase;
+  color:#fff;line-height:1;
+}
+.hd-name em{color:var(--c);font-style:normal;}
+
+.hd-sub{
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;color:var(--c);
+  letter-spacing:.18em;margin-top:5px;
+  opacity:.85;
+}
+
+/* vertical divider */
+.hd-div{width:1px;background:var(--t3);margin:14px 0;}
+
+.hd-contact{
+  padding:16px 22px;
+  display:flex;flex-direction:column;
+  justify-content:center;gap:6px;
+  min-width:200px;
+}
+
+.ct{
+  display:flex;align-items:center;gap:7px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:9px;color:var(--t1);
+}
+.ct a{color:var(--t1);text-decoration:none;}
+.ct a:hover{color:var(--c);}
+.ct-icon{
+  width:14px;height:14px;
+  border:1px solid var(--t3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.ct-dot{width:3px;height:3px;background:var(--c);border-radius:50%;box-shadow:0 0 5px var(--c);}
+
+/* ── SIDEBAR ─────────────────────────────────── */
+.sb{
+  background:var(--bg1);
+  border-right:1px solid rgba(0,245,255,.12);
+  padding:18px 13px;
+  display:flex;flex-direction:column;gap:16px;
+}
+
+.sb-ttl{
+  font-family:'Share Tech Mono',monospace;
+  font-size:8px;letter-spacing:.22em;
+  color:var(--c);text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+  padding-bottom:5px;
+  border-bottom:1px solid rgba(0,245,255,.13);
+  margin-bottom:8px;
+}
+.sb-ttl-arrow{color:var(--mg);font-size:7px;}
+
+/* skill tags */
+.tags{display:flex;flex-wrap:wrap;gap:3px;}
+.tag{
+  font-family:'Share Tech Mono',monospace;
+  font-size:7.5px;color:rgba(0,245,255,.7);
+  border:1px solid rgba(0,245,255,.2);
+  background:rgba(0,245,255,.04);
+  padding:2px 6px;letter-spacing:.04em;
+  line-height:1.4;white-space:nowrap;
+}
+.tag.hot{color:rgba(255,45,155,.9);border-color:rgba(255,45,155,.28);background:rgba(255,45,155,.05);}
+.tag.warm{color:rgba(255,209,102,.85);border-color:rgba(255,209,102,.25);background:rgba(255,209,102,.04);}
+
+.sk-cat{
+  font-family:'Share Tech Mono',monospace;
+  font-size:7.5px;color:var(--t2);
+  letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:4px;margin-top:7px;
+}
+.sk-cat:first-child{margin-top:0;}
+
+/* soft skill */
+.ss{
+  font-size:9px;color:var(--t1);
+  padding:3px 0 3px 10px;
+  border-left:1px solid rgba(0,245,255,.2);
+  margin-bottom:2px;position:relative;
+}
+.ss::before{
+  content:'◆';font-size:4.5px;color:var(--c);
+  position:absolute;left:3px;top:50%;transform:translateY(-50%);
+}
+
+/* lang bar */
+.lg-name{
+  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px;
+  color:var(--t0);display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:3px;
+}
+.lg-lvl{font-family:'Share Tech Mono',monospace;font-size:7.5px;color:var(--t1);}
+.lg-track{height:2px;background:rgba(0,245,255,.08);margin-bottom:8px;}
+.lg-fill{height:100%;background:linear-gradient(90deg,var(--c),#00bcd4);box-shadow:0 0 6px var(--c);}
+
+/* edu */
+.edu{
+  padding:6px 0 6px 10px;
+  border-left:1px solid rgba(0,245,255,.18);
+  margin-bottom:6px;
+}
+.edu-deg{
+  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-size:9.5px;color:var(--t0);line-height:1.35;
+}
+.edu-inst{
+  font-family:'Share Tech Mono',monospace;font-size:7.5px;
+  color:var(--t1);margin:2px 0;
+}
+.edu-yr{
+  font-family:'Share Tech Mono',monospace;font-size:7.5px;color:var(--c);
+}
+
+/* act */
+.act{
+  font-size:9px;color:var(--t1);
+  padding:2px 0 2px 10px;
+  border-left:1px solid rgba(255,45,155,.2);
+  margin-bottom:2px;position:relative;
+}
+.act::before{
+  content:'◆';font-size:4.5px;color:var(--mg);
+  position:absolute;left:3px;top:50%;transform:translateY(-50%);
+}
+
+/* ── MAIN ─────────────────────────────────────── */
+.mn{
+  background:var(--bg0);
+  padding:18px 20px 18px 17px;
+  display:flex;flex-direction:column;gap:15px;
+}
+
+/* section headers */
+.sec-hd{
+  display:flex;align-items:center;gap:9px;
+  margin-bottom:10px;
+}
+.sec-ttl{
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.25em;
+  color:var(--c);text-transform:uppercase;
+  white-space:nowrap;
+}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--cb) 0%,transparent 100%);}
+.sec-idx{
+  font-family:'Share Tech Mono',monospace;
+  font-size:7.5px;color:var(--t2);white-space:nowrap;
+}
+
+/* profile */
+.profile{
+  background:var(--bg2);
+  border:1px solid rgba(0,245,255,.1);
+  border-left:2px solid var(--c);
+  padding:10px 13px;
+  font-size:9.5px;color:var(--t1);
+  line-height:1.65;
+  position:relative;
+}
+.profile::before{
+  content:'PROFILE';
+  position:absolute;right:10px;top:8px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:7px;color:var(--t3);letter-spacing:.2em;
+}
+.profile strong{color:var(--c);font-weight:600;}
+
+/* experience entry */
+.exp{
+  position:relative;
+  padding-left:15px;
+  margin-bottom:12px;
+}
+/* timeline line */
+.exp::before{
+  content:'';position:absolute;
+  left:0;top:6px;bottom:-6px;width:1px;
+  background:linear-gradient(180deg,rgba(0,245,255,.5) 0%,transparent 100%);
+}
+/* diamond node */
+.exp::after{
+  content:'';position:absolute;
+  left:-3px;top:6px;width:7px;height:7px;
+  border:1px solid var(--c);
+  background:var(--bg0);
+  transform:rotate(45deg);
+  box-shadow:0 0 8px rgba(0,245,255,.5);
+}
+
+.exp-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:8px;margin-bottom:1px;
+}
+.exp-co{
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:13px;color:#fff;
+  text-transform:uppercase;letter-spacing:.06em;
+  line-height:1.1;
+}
+.exp-dt{
+  font-family:'Share Tech Mono',monospace;
+  font-size:8px;color:var(--c);
+  white-space:nowrap;margin-top:2px;
+  background:rgba(0,245,255,.06);
+  border:1px solid rgba(0,245,255,.18);
+  padding:1px 6px;
+}
+.exp-role{
+  font-family:'Share Tech Mono',monospace;
+  font-size:8.5px;color:var(--mg);
+  letter-spacing:.09em;text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+/* project lines inside exp */
+.proj{
+  margin-bottom:5px;
+  padding-left:10px;
+  border-left:1px solid rgba(0,245,255,.12);
+}
+.proj-name{
+  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-size:10px;color:var(--c);
+  letter-spacing:.04em;margin-bottom:1px;
+}
+.proj-name span{color:var(--gold);}
+.proj-desc{
+  font-size:9px;color:var(--t1);line-height:1.55;
+}
+
+.exp-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;}
+.etag{
+  font-family:'Share Tech Mono',monospace;
+  font-size:7px;color:rgba(0,96,100,.9);
+  border:1px solid rgba(0,96,100,.55);
+  background:rgba(0,96,100,.12);
+  padding:1px 5px;
+}
+
+/* ── FOOTER ──────────────────────────────────── */
+.ft{
+  grid-column:1/-1;
+  background:var(--bg2);
+  border-top:1px solid rgba(0,245,255,.15);
+  padding:8px 22px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.ft-code{
+  font-family:'Share Tech Mono',monospace;
+  font-size:7.5px;color:var(--t2);letter-spacing:.12em;
+}
+
+/* ── DECORATIVE CORNER ───────────────────────── */
+.corner{
+  position:absolute;
+  width:16px;height:16px;
+  border-color:var(--c);
+  border-style:solid;
+  opacity:.5;
+}
+.corner-tl{top:0;left:0;border-width:1px 0 0 1px;}
+.corner-tr{top:0;right:0;border-width:1px 1px 0 0;}
+.corner-bl{bottom:0;left:0;border-width:0 0 1px 1px;}
+.corner-br{bottom:0;right:0;border-width:0 1px 1px 0;}
+
+@media print{
+  html,body{background:#03050f!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body::after,.cv-toolbar{display:none;}
+}
+@page{size:A4;margin:0;}
+
+/* ══ CV TOOLBAR ════════════════════════════════ */
+.cv-toolbar{position:fixed;top:12px;right:12px;display:flex;gap:8px;z-index:9999}
+.cv-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--cb);background:var(--bg2);color:var(--c);cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:6px;transition:all .2s}
+.cv-btn:hover{background:var(--c);color:var(--bg0);box-shadow:0 0 16px rgba(0,245,255,.3)}
+</style>
+</head>
+<body>
+
+<!-- CV Toolbar -->
+<div class="cv-toolbar">
+  <a href="index.html" class="cv-btn">← Portafolio</a>
+  <button class="cv-btn" onclick="window.print()">↓ Descargar PDF</button>
+</div>
+
+<div class="wrap">
+
+<!-- ════ HEADER ══════════════════════════════════════════ -->
+<header class="hd">
+  <div class="hd-id">
+    <div class="hd-bracket">// CURRICULUM_VITAE · SOFTWARE_ENGINEER</div>
+    <div class="hd-name">John <em>Ortiz</em> Peñailillo</div>
+    <div class="hd-sub">JAVA &nbsp;·&nbsp; SPRING_BOOT &nbsp;·&nbsp; ANGULAR &nbsp;·&nbsp; MICROSERVICIOS &nbsp;·&nbsp; FULL_STACK</div>
+  </div>
+  <div class="hd-div"></div>
+  <div class="hd-contact">
+    <div class="ct"><div class="ct-dot"></div><a href="mailto:johnpro38@gmail.com">johnpro38@gmail.com</a></div>
+    <div class="ct"><div class="ct-dot"></div>+569 8156 1929</div>
+    <div class="ct"><div class="ct-dot"></div>Talca, Chile</div>
+    <div class="ct"><div class="ct-dot"></div><a href="https://github.com/deathztalker">github.com/deathztalker</a></div>
+    <div class="ct"><div class="ct-dot"></div><a href="https://linkedin.com/in/john-ortiz">linkedin.com/in/john-ortiz</a></div>
+  </div>
+</header>
+
+<!-- ════ SIDEBAR ═════════════════════════════════════════ -->
+<aside class="sb">
+
+  <!-- STACK -->
+  <div>
+    <div class="sb-ttl"><span class="sb-ttl-arrow">▸</span> Stack Tecnológico</div>
+
+    <div class="sk-cat">Lenguajes</div>
+    <div class="tags">
+      <span class="tag hot">Java</span>
+      <span class="tag hot">JavaScript</span>
+      <span class="tag hot">TypeScript</span>
+      <span class="tag">C#</span>
+      <span class="tag">Python</span>
+      <span class="tag">PHP</span>
+      <span class="tag">C / C++</span>
+      <span class="tag">VB.NET</span>
+    </div>
+
+    <div class="sk-cat">Backend &amp; Frameworks</div>
+    <div class="tags">
+      <span class="tag hot">Spring Boot</span>
+      <span class="tag hot">Node.js</span>
+      <span class="tag">Express.js</span>
+      <span class="tag">Spring MVC</span>
+      <span class="tag">Spring Security</span>
+      <span class="tag">JPA/Hibernate</span>
+      <span class="tag">CodeIgniter</span>
+      <span class="tag">Liferay</span>
+    </div>
+
+    <div class="sk-cat">Frontend &amp; Mobile</div>
+    <div class="tags">
+      <span class="tag hot">Angular</span>
+      <span class="tag">React</span>
+      <span class="tag">Vue.js</span>
+      <span class="tag">React Native</span>
+      <span class="tag">RxJS</span>
+      <span class="tag">ExtJS</span>
+      <span class="tag">HTML5/CSS3</span>
+    </div>
+
+    <div class="sk-cat">Bases de Datos</div>
+    <div class="tags">
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">SQL Server</span>
+      <span class="tag">Oracle</span>
+      <span class="tag">MongoDB</span>
+      <span class="tag">Redis</span>
+    </div>
+
+    <div class="sk-cat">DevOps &amp; Cloud</div>
+    <div class="tags">
+      <span class="tag warm">Docker</span>
+      <span class="tag warm">Kubernetes</span>
+      <span class="tag warm">Jenkins</span>
+      <span class="tag warm">CI/CD</span>
+      <span class="tag">Git/GitHub</span>
+      <span class="tag">GCP</span>
+      <span class="tag">AWS</span>
+      <span class="tag">Linux</span>
+    </div>
+
+    <div class="sk-cat">Integración &amp; APIs</div>
+    <div class="tags">
+      <span class="tag">REST API</span>
+      <span class="tag">SOAP</span>
+      <span class="tag">HL7/FHIR</span>
+      <span class="tag">HAPI FHIR</span>
+      <span class="tag">Swagger</span>
+      <span class="tag">Microservicios</span>
+    </div>
+
+    <div class="sk-cat">Metodologías</div>
+    <div class="tags">
+      <span class="tag">Scrum/Agile</span>
+      <span class="tag">Jira</span>
+      <span class="tag">Kanban</span>
+    </div>
+
+    <div class="sk-cat">Hardware &amp; IoT</div>
+    <div class="tags">
+      <span class="tag">Arduino</span>
+      <span class="tag">PCB Design</span>
+      <span class="tag">GPS/GPRS</span>
+      <span class="tag">Blender</span>
+      <span class="tag">3D Print</span>
+    </div>
+  </div>
+
+  <!-- SOFT SKILLS -->
+  <div>
+    <div class="sb-ttl"><span class="sb-ttl-arrow">▸</span> Soft Skills</div>
+    <div class="ss">Resolución de problemas</div>
+    <div class="ss">Pensamiento analítico</div>
+    <div class="ss">Trabajo en equipo</div>
+    <div class="ss">Comunicación efectiva</div>
+    <div class="ss">Adaptabilidad</div>
+    <div class="ss">Autodidacta</div>
+    <div class="ss">Liderazgo técnico</div>
+  </div>
+
+  <!-- IDIOMAS -->
+  <div>
+    <div class="sb-ttl"><span class="sb-ttl-arrow">▸</span> Languages</div>
+    <div class="lg-name">Inglés <span class="lg-lvl">B1 Intermedio</span></div>
+    <div class="lg-track"><div class="lg-fill" style="width:55%"></div></div>
+    <div class="lg-name">Español <span class="lg-lvl">Nativo</span></div>
+    <div class="lg-track"><div class="lg-fill" style="width:100%"></div></div>
+  </div>
+
+  <!-- FORMACIÓN -->
+  <div>
+    <div class="sb-ttl"><span class="sb-ttl-arrow">▸</span> Formación</div>
+    <div class="edu">
+      <div class="edu-deg">Ing. de Ejecución en Computación e Informática</div>
+      <div class="edu-inst">U. Católica del Maule, Talca</div>
+      <div class="edu-yr">2017 – 2021</div>
+    </div>
+    <div class="edu">
+      <div class="edu-deg">Técnico Superior — Analista Programador</div>
+      <div class="edu-inst">CFT San Agustín, Talca</div>
+      <div class="edu-yr">2015 – 2017</div>
+    </div>
+    <div class="edu">
+      <div class="edu-deg">Técnico en Electrónica</div>
+      <div class="edu-inst">Lic. Tec. Prof. Diego Portales, Talca</div>
+      <div class="edu-yr">2011 – 2014</div>
+    </div>
+  </div>
+
+  <!-- ACTIVIDADES -->
+  <div>
+    <div class="sb-ttl"><span class="sb-ttl-arrow">▸</span> Actividades &amp; Proyectos</div>
+    <div class="act">Game Dev — DarkRealm (JS RPG)</div>
+    <div class="act">Apps móviles con React Native</div>
+    <div class="act">Electrónica maker / IoT</div>
+    <div class="act">Open Source — GitHub</div>
+  </div>
+
+</aside>
+
+<!-- ════ MAIN ════════════════════════════════════════════ -->
+<main class="mn">
+
+  <!-- PERFIL -->
+  <section>
+    <div class="sec-hd">
+      <div class="sec-ttl">Professional Profile</div>
+      <div class="sec-line"></div>
+      <div class="sec-idx">PROFILE</div>
+    </div>
+    <div class="profile">
+      Software Engineer specializing in the architecture and implementation of scalable systems. With <strong>over 7 years of experience</strong>, I design and deploy <strong>microservices with Java and Spring Boot</strong>, and build robust frontend ecosystems (Angular, React, Vue.js). Expert in integrating and modernizing platforms for public and private sectors using <strong>REST/SOAP APIs and HL7/FHIR standards</strong>. Dual educational background in <strong>electronics and computer science</strong>, providing a structural vision from hardware and IoT layers to cloud deployments and serverless architectures.
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section>
+    <div class="sec-hd">
+      <div class="sec-ttl">Professional Experience</div>
+      <div class="sec-line"></div>
+      <div class="sec-idx">EXP_LOG</div>
+    </div>
+
+    <!-- NTT DATA -->
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-co">NTT DATA Chile S.A.</div>
+        <div class="exp-dt">DIC 2023 → PRESENTE</div>
+      </div>
+      <div class="exp-role">// Software Engineer</div>
+      <p style="font-size:9px;color:var(--t1);margin-bottom:6px;">Ingeniería de software <em>enterprise</em> para clientes estratégicos bajo ecosistemas ágiles (Scrum).</p>
+      <div class="proj">
+        <div class="proj-name">Arquitectura de Microservicios — LATAM Airlines</div>
+        <div class="proj-desc">Diseño y orquestación de servicios backend (Spring Boot) y frontend reactivo (Angular/RxJS) para la optimización en la gestión operativa de flotas aéreas y control de pasajeros. Despliegue en GCP gestionando flujos CI/CD con Docker y Jenkins.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-name">Interoperabilidad en Salud — EHCOS</div>
+        <div class="proj-desc">Desarrollo de APIs RESTful de alta concurrencia para la sincronización de historiales clínicos a nivel nacional. Implementación del protocolo HL7/FHIR, asegurando el cumplimiento de estrictos estándares de ciberseguridad mediante Spring Security.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="etag">Spring Boot</span><span class="etag">Angular</span><span class="etag">Microservicios</span><span class="etag">GCP</span><span class="etag">Docker</span><span class="etag">Jenkins</span><span class="etag">CI/CD</span><span class="etag">HL7/FHIR</span><span class="etag">Spring Security</span><span class="etag">RxJS</span><span class="etag">Java</span><span class="etag">Jira</span><span class="etag">Scrum</span>
+      </div>
+    </div>
+
+    <!-- VALPOSYSTEMS -->
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-co">ValpoSystems Ltda.</div>
+        <div class="exp-dt">OCT 2022 → DIC 2023</div>
+      </div>
+      <div class="exp-role">// Full Stack Software Engineer</div>
+      <p style="font-size:9px;color:var(--t1);margin-bottom:6px;">Arquitectura de plataformas B2G con foco en compliance normativo, auditoría y procesamiento de datos masivos.</p>
+      <div class="proj">
+        <div class="proj-name">Plataformas Gubernamentales de Fiscalización</div>
+        <div class="proj-desc">Desarrollo integral de sistemas core para la Contraloría General de la República y Superintendencia de Educación. Mantenimiento y optimización de procesos críticos en entornos Java/Solaris, y modernización de interfaces mediante Liferay y Vue.js.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-name">Integración Tributaria — B2B</div>
+        <div class="proj-desc">Automatización de validaciones fiscales y facturación electrónica mediante la integración de servicios SOAP/REST del Servicio de Impuestos Internos (SII).</div>
+      </div>
+      <div class="exp-tags">
+        <span class="etag">Liferay</span><span class="etag">Vue.js</span><span class="etag">Spring Boot</span><span class="etag">VB.NET</span><span class="etag">Java</span><span class="etag">Node.js</span><span class="etag">PostgreSQL</span><span class="etag">SQL Server</span><span class="etag">REST/SOAP</span><span class="etag">Solaris</span><span class="etag">Git</span>
+      </div>
+    </div>
+
+    <!-- FIRMA -->
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-co">Firma Abogados Chile SpA</div>
+        <div class="exp-dt">OCT 2021 → OCT 2022</div>
+      </div>
+      <div class="exp-role">// Full Stack Developer</div>
+      <div class="proj">
+        <div class="proj-name">SaaS de Gestión y Geolocalización de Flotas</div>
+        <div class="proj-desc">Arquitectura e implementación de plataforma unificada con PHP/CodeIgniter para automatización de contratos y facturación. Desarrollo de módulo cartográfico (Leaflet, ExtJS, Google Maps) para seguimiento vehicular por GPS en tiempo real.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="etag">PHP</span><span class="etag">CodeIgniter</span><span class="etag">SQL Server</span><span class="etag">ExtJS</span><span class="etag">JavaScript</span><span class="etag">Leaflet</span><span class="etag">Google Maps</span><span class="etag">GPS API</span>
+      </div>
+    </div>
+
+    <!-- CEHO -->
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-co">CEHO Servicios</div>
+        <div class="exp-dt">NOV 2018 → OCT 2021</div>
+      </div>
+      <div class="exp-role">// Técnico en Terreno TI / Electrónica</div>
+      <div class="proj">
+        <div class="proj-desc">Soporte técnico especializado para TotalPack Ltda.: instalación, configuración y reparación de equipos turnomáticos, terminales de autoservicio y relojes control con BD embebida. Atención en terreno a nivel nacional; resolución de incidencias críticas y configuración de redes y conectividad de dispositivos.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="etag">Electrónica</span><span class="etag">BD Embebidas</span><span class="etag">Soporte TI</span><span class="etag">Redes</span><span class="etag">Hardware</span><span class="etag">Windows Server</span>
+      </div>
+    </div>
+
+    <!-- MOBIQUOS -->
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-co">Mobiquos Ltda.</div>
+        <div class="exp-dt">JUN 2018 → OCT 2018</div>
+      </div>
+      <div class="exp-role">// Técnico en Desarrollo Electro-Informático</div>
+      <div class="proj">
+        <div class="proj-desc">Diseño y fabricación de PCBs para prototipos electrónicos. Modelado 3D (Blender / 123D Design) e impresión de carcasas funcionales. Programación de firmware en C/C++ para microcontroladores Arduino. Ensamblado y pruebas de kits de geolocalización GPS/GPRS para tracking vehicular.</div>
+      </div>
+      <div class="exp-tags">
+        <span class="etag">Arduino</span><span class="etag">C/C++</span><span class="etag">PCB Design</span><span class="etag">3D Print</span><span class="etag">GPS/GPRS</span><span class="etag">Blender</span>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- ════ FOOTER ══════════════════════════════════════════ -->
+<footer class="ft">
+  <div class="ft-code">CV_v2026 · JOHN_MATIAS_ORTIZ · TALCA_CL</div>
+  <div class="ft-code">SOFTWARE_ENGINEER · FULL_STACK · 7+_AÑOS_EXP</div>
+  <div class="ft-code">johnpro38@gmail.com</div>
+</footer>
+
+</div>
+</body>
+</html>
